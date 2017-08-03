@@ -18,10 +18,6 @@ public class User {
 
 
     @NotNull
-    @Pattern(regexp = "[a-zA-Z][a-zA-Z0-9_-]{4,20}", message = "Invalid username")
-    private String username;
-
-    @NotNull
     private String pwHash;
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -36,8 +32,8 @@ public class User {
 
     public User() {}
 
-    public User(String username, String password, String email, String firstName, String lastName) {
-        this.username = username;
+    public User( String password, String email, String firstName, String lastName) {
+
         this.pwHash = hashPassword(password);
         this.email = email;
         this.firstName = firstName;
@@ -51,10 +47,6 @@ public class User {
     public String getLastName() { return lastName;}
 
     public void setLastName(String lastName) { this.lastName = lastName; }
-
-    public String getUsername() {
-        return username;
-    }
 
     public String getEmail() { return email;}
 
