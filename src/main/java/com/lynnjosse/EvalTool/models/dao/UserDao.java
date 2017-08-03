@@ -1,4 +1,4 @@
-package com.lynnjosse.EvalTool.models.daos;
+package com.lynnjosse.EvalTool.models.dao;
 
 import com.lynnjosse.EvalTool.models.User;
 import org.springframework.data.repository.CrudRepository;

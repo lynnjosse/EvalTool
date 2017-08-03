@@ -2,14 +2,17 @@ package com.lynnjosse.EvalTool.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.ManyToMany;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Id;
 
 @Entity
-public class Evaluation extends AbstractEntity{
+public class Evaluation {
+
+    @Id
+    @GeneratedValue
+    private int id;
 
     //@ManyToMany
-    private int userId;
+    private int bldgId;
 
     private String userDescription;
 
@@ -33,9 +36,33 @@ public class Evaluation extends AbstractEntity{
 
     private String outbuildingNotes;
 
-    public int getUserId() { return userId; }
+    public Evaluation(){};
 
-    public void setUserId(int userId) { this.userId = userId; }
+    public Evaluation(int bldgId, String userDescription, boolean collapse, String collapseNotes, boolean boardSecure, String boardNotes, String roofNotes, String gutterNotes, String adminNotes,
+                      String envirNotes, int numOfOutbuildings, String outbuildingNotes) {
+        this.id=id;
+        this.bldgId = bldgId;
+        this.userDescription = userDescription;
+        this.collapse = collapse;
+        this.collapseNotes = collapseNotes;
+        this.boardSecure = boardSecure;
+        this.boardNotes = boardNotes;
+        this.roofNotes = roofNotes;
+        this.gutterNotes = gutterNotes;
+        this.adminNotes = adminNotes;
+        this.envirNotes = envirNotes;
+        this.numOfOutbuildings = numOfOutbuildings;
+        this.outbuildingNotes = outbuildingNotes;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public int getBldgId() { return bldgId; }
+
+    public void setBldgId(int bldgId) { this.bldgId = bldgId; }
 
     public String getUserDescription() { return userDescription; }
 
@@ -105,21 +132,5 @@ public class Evaluation extends AbstractEntity{
         this.outbuildingNotes = outbuildingNotes;
     }
 
-    public Evaluation(){};
 
-    public Evaluation(int userId, String userDescription, boolean collapse, String collapseNotes, boolean boardSecure, String boardNotes, String roofNotes, String gutterNotes, String adminNotes,
-                      String envirNotes, int numOfOutbuildings, String outbuildingNotes) {
-        this.userId = userId;
-        this.userDescription = userDescription;
-        this.collapse = collapse;
-        this.collapseNotes = collapseNotes;
-        this.boardSecure = boardSecure;
-        this.boardNotes = boardNotes;
-        this.roofNotes = roofNotes;
-        this.gutterNotes = gutterNotes;
-        this.adminNotes = adminNotes;
-        this.envirNotes = envirNotes;
-        this.numOfOutbuildings = numOfOutbuildings;
-        this.outbuildingNotes = outbuildingNotes;
-    }
 }
