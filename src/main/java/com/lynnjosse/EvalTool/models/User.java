@@ -16,6 +16,9 @@ public class User {
     @GeneratedValue
     private int id;
 
+    public int getId() {
+        return id;
+    }
 
     @NotNull
     private String pwHash;
