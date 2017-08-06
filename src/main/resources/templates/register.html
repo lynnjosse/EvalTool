@@ -8,9 +8,19 @@
 
 <form method="post" th:object="${registerForm}" style="width:600px;">
     <div class="form-group">
-        <label th:for="username">Email</label>
-        <input class="form-control" th:field="*{Email}" />
-        <div class="error" th:errors="*{Email}"></div>
+        <label th:for="firstName">First Name</label>
+        <input class="form-control" th:field="*{firstName}" />
+        <div class="error" th:errors="*{firstName}"></div>
+    </div>
+    <div class="form-group">
+        <label th:for="lastName">Last Name</label>
+        <input class="form-control" th:field="*{lastName}" />
+        <div class="error" th:errors="*{lastName}"></div>
+    </div>
+    <div class="form-group">
+        <label th:for="email">Email</label>
+        <input class="form-control" th:field="*{email}" />
+        <div class="error" th:errors="*{email}"></div>
     </div>
     <div class="form-group">
         <label th:for="password">Password</label>

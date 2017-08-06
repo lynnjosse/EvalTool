@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Buildings {
+public class Building {
 
     @Id
     private int id;
@@ -38,7 +38,9 @@ public class Buildings {
 
     private String streetName;
 
-    public Buildings (){}
+
+
+    public Building (){}
 
     public int getId() {
         return id;

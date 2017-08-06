@@ -2,14 +2,14 @@ package com.lynnjosse.EvalTool.models.dao;
 
 import com.lynnjosse.EvalTool.models.User;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+        import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
+        import javax.transaction.Transactional;
 
 
 @Transactional
 @Repository
 public interface UserDao extends CrudRepository<User, Integer> {
 
-    User findByUsername(String username);
+    User findByEmail(String email);
 }

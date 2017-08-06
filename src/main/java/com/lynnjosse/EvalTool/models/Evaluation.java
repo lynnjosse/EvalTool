@@ -3,6 +3,8 @@ package com.lynnjosse.EvalTool.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.List;
 
 @Entity
 public class Evaluation {
@@ -11,7 +13,6 @@ public class Evaluation {
     @GeneratedValue
     private int id;
 
-    //@ManyToMany
     private int bldgId;
 
     private String userDescription;
@@ -35,6 +36,9 @@ public class Evaluation {
     private int numOfOutbuildings;
 
     private String outbuildingNotes;
+
+    @ManyToMany
+    private List<User> users;
 
     public Evaluation(){};
 

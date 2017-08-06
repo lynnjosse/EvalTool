@@ -33,6 +33,13 @@ public class User {
     @NotNull
     private String lastName;
 
+    //primitive boolean defaults to false//
+    private boolean admin;
+
+    @ManyToMany(mappedBy = "users")
+    private List<Evaluation> evaluations;
+
+
     public User() {}
 
     public User( String password, String email, String firstName, String lastName) {
@@ -63,3 +70,4 @@ public class User {
         return encoder.matches(password, pwHash);
     }
 }
+
