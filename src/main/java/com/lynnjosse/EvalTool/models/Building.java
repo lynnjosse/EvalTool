@@ -1,13 +1,13 @@
 package com.lynnjosse.EvalTool.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Building {
 
     @Id
+    @Column(name = "id")
     private int id;
 
     private int parcelId;
@@ -37,6 +37,9 @@ public class Building {
     private int addrNum;
 
     private String streetName;
+
+    @OneToOne
+    private Evaluation relatedEvaluation;
 
 
 

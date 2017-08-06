@@ -1,9 +1,6 @@
 package com.lynnjosse.EvalTool.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -39,6 +36,9 @@ public class Evaluation {
 
     @ManyToMany
     private List<User> users;
+
+    @OneToOne
+    private Building relatedBuilding;
 
     public Evaluation(){};
 
