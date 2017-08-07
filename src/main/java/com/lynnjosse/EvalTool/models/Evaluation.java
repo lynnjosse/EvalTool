@@ -34,9 +34,6 @@ public class Evaluation {
 
     private String outbuildingNotes;
 
-    @ManyToMany
-    private List<User> users;
-
     @OneToOne
     private Building relatedBuilding;
 

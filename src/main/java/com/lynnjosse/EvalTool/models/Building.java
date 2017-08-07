@@ -2,6 +2,7 @@ package com.lynnjosse.EvalTool.models;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Building {
@@ -41,6 +42,8 @@ public class Building {
     @OneToOne
     private Evaluation relatedEvaluation;
 
+    @ManyToMany
+    private List<User> users;
 
 
     public Building (){}

@@ -37,12 +37,12 @@ public class User {
     private boolean admin;
 
     @ManyToMany(mappedBy = "users")
-    private List<Evaluation> evaluations;
+    private List<Building> buildings;
 
 
     public User() {}
 
-    public User( String password, String email, String firstName, String lastName) {
+    public User(String password, String email, String firstName, String lastName) {
 
         this.pwHash = hashPassword(password);
         this.email = email;
@@ -69,5 +69,11 @@ public class User {
     public boolean isMatchingPassword(String password) {
         return encoder.matches(password, pwHash);
     }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+
 }
 
