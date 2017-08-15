@@ -74,6 +74,10 @@ public class User {
         return admin;
     }
 
+    public void addBuilding(Building building) {
+        buildings.add(building); }
+
+
 
 }
 
