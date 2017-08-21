@@ -9,15 +9,18 @@
 
 <h1 th:text="${title}">Default Title</h1>
 
-<!-- TODO: add a list of all of the buildings assigned to this user-->
 
-    <div th:if="${user.admin}">
+<!--
+<ul>
+    <li th:each = "building:${buildings}" th:text="${building.address}"></li>
+</ul>
 
-        <a href="/user/select">assign building</a>
-        <br/>
-        <a href = "/user/add-admin">add admins</a>
+<p th:unless="${buildings.size()}">No buildings on the list</p>
+-->
 
-    </div>
+<p>
+    <a th:href ="'/user/assign-building/'+${userId}">Assign Building</a>
+</p>
 
 </body>
 </html>

@@ -37,7 +37,7 @@ public class Building {
 
     private int addrNum;
 
-    private String streetName;
+    private String streetname;
 
     @OneToOne
     private Evaluation relatedEvaluation;
@@ -104,8 +104,8 @@ public class Building {
         return addrNum;
     }
 
-    public String getStreetName() {
-        return streetName;
+    public String getStreetname() {
+        return streetname;
     }
 }
 

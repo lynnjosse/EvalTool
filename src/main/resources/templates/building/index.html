@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body class="container">
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<h1>All LRA Buildings in the list</h1>
+<!-- <h1 th:text="${user.email}"></h1> -->
+
+
+<p th:unless="${buildings.size()}">No buildings on the list</p>
+
+<table class="table">
+
+    <tr>
+        <th>Address</th>
+        <th>Description</th>
+        <th>Use</th>
+    </tr>
+
+    <tr th:each="building : ${buildings}">
+        <td th:text="${building.address}"></td>
+        <td th:text="${building.description}"></td>
+        <td th:text="${building.bldgSF}"></td>
+    </tr>
+
+</table>
+
+
+
+
+</body>
+</html>

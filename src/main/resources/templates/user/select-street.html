@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body class="container">
+
+<nav th:replace="fragments :: navigation"></nav>
+<h1 th:text="${title}">Default Title</h1>
+
+
+
+
+<p th:text = "${userId}">userId</p>
+<p th:text = "${wardNum}">catcatcat</p>
+
+
+
+<form  method = "post" action="/user/select-building">
+
+
+    <div class = "form-group" >
+        <label>Street Name</label>
+        <select name = "streetname">
+            <option th:each="streetname:${streets}"
+            th:text="${streetname}"
+            th:value="${streetname}"></option>
+        </select>
+
+        <input type = "hidden" name="userId"  th:value="${userId}" />
+
+        <input type = "hidden" name="wardNum"  th:value="*{wardNum}" />
+    <input type = "submit" value="Do This" />
+    </div>
+
+</form>
+
+
+
+
+</body>
+</html>

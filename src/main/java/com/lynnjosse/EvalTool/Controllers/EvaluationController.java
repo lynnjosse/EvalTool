@@ -13,11 +13,11 @@ import com.lynnjosse.EvalTool.models.dao.EvaluationDao;
 public class EvaluationController {
 
     @Autowired
-    public EvaluationDao EvaluationDao;
+    public EvaluationDao evaluationDao;
 
     @RequestMapping (value = "")
     public String eval(Model model) {
-        model.addAttribute("evaluations", EvaluationDao.findAll());
+        model.addAttribute("evaluations", evaluationDao.findAll());
         model.addAttribute("title", "My Buildings");
         return "eval/";
     }

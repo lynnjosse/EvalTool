@@ -10,15 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
+
+import static java.util.Collections.sort;
 
 @Controller
 @RequestMapping(value = "user")
@@ -42,40 +41,69 @@ public class UserController extends AbstractController{
 
     }
 
+    @RequestMapping(value = "add-admin", method = RequestMethod.GET)
+        public String displayAddAdmin(Model model) {
+            model.addAttribute ("title", "Add admins");
+            Iterable<User> users = userDao.findAll();
+            model.addAttribute("users" , users);
+            return "user/add-admin";
+        }
+
+//    @RequestMapping(value = "add-admin", method = RequestMethod.POST)
+//    public String processAddAdmin(@RequestParam int[] userIds) {
+//        model.addAttribute ("title", "Add admins");
+//        Iterable<User> users = userDao.findAll();
+//        model.addAttribute("users" , users);
+//
+//        for (int userId : userIds) {
+//
+//
+//            //change user.admin to true
+//
+//            //save user
+//
+//        }
+//
+//        return "redirect:";
+    //}
+
 
     @RequestMapping(value = "select", method = RequestMethod.GET)
         public String select(Model model) {
-          SelectForm form = new SelectForm (userDao.findAll(), buildingDao.findWardDistinctBy());
+          SelectForm form = new SelectForm (userDao.findAll(), buildingDao.findDistinctWards());
             model.addAttribute("form", form);
             model.addAttribute("title", "Select a User and Ward");
 
         return "user/select";
+        }
+
+
+    @RequestMapping(value = "select-street" , method = RequestMethod.POST)
+    public String selectStreet(Model model, @RequestParam Integer wardNum, @RequestParam Integer userId) {
+        List streets = buildingDao.findDistinctStreets(wardNum);
+        sort(streets);
+        model.addAttribute("title", "Select a street");
+        model.addAttribute("streets", streets);
+        model.addAttribute("wardNum", wardNum);
+        model.addAttribute("userId", userId);
+
+
+        return "user/select-street";
     }
 
-
-    @RequestMapping(value = "select" , method = RequestMethod.POST)
-    public String selectStreet(Model model) {
-        SelectForm form = new SelectForm (userDao.findAll(),buildingDao.findWardDistinctBy());
-        model.addAttribute("form", form);
-        model.addAttribute("title", "Select a User and Ward");
-
-        return "select";
-    }
-
-    @RequestMapping(value = "assign-building", method= RequestMethod.GET)
-    public String assignBuildingToUser (Model model, @ModelAttribute SelectForm form)  {
-
-
-        BldgAssignForm bldgForm = new BldgAssignForm();
-
-        //-do function here that generates list of buildings from the ward and street passed in//
+    @RequestMapping(value = "select-building", method= RequestMethod.POST)
+    public String selectBuilding (Model model,  @RequestParam Integer wardNum,
+                                        @RequestParam Integer userId,
+                                        @RequestParam String streetname)  {
 
 
 
+        List<Building> buildings = buildingDao.findByWardAndStreetname(wardNum, streetname);
 
-        //this line has error bc user not passed in? model.addAttribute("title", "assign building to: " + user.getFirstName());
-        model.addAttribute("form", form);
-        return "user/assign-building";
+        model.addAttribute ("title", "Select a building");
+        model.addAttribute("buildings", buildings);
+
+        return "user/select-building";
     }
 
     @RequestMapping(value= "assign-building", method = RequestMethod.POST)
