@@ -61,7 +61,8 @@ public class UserController extends AbstractController{
     @RequestMapping(value = "view/{userId}", method = RequestMethod.GET)
     public String viewMenu (Model model, @PathVariable int userId) {
         User user = userDao.findOne(userId);
-        model.addAttribute("title", user.getFirstName());
+        String name = user.getFirstName() + " " + user.getLastName();
+        model.addAttribute("title", name);
         model.addAttribute("buildings", user.getBuildings());
         model.addAttribute("ID", user.getId());
         return "user/view";
