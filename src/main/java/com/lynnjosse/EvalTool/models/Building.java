@@ -45,7 +45,6 @@ public class Building {
     @ManyToMany
     private List<User> users;
 
-
     public Building (){}
 
     public int getId() {
@@ -107,6 +106,9 @@ public class Building {
     public String getStreetname() {
         return streetname;
     }
+
+    public void addUser(User user) {
+        users.add(user); }
 }
 
 

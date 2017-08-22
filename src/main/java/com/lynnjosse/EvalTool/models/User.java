@@ -16,9 +16,6 @@ public class User {
     @GeneratedValue
     private int id;
 
-    public int getId() {
-        return id;
-    }
 
     @NotNull
     private String pwHash;
@@ -39,7 +36,6 @@ public class User {
     @ManyToMany(mappedBy = "users")
     private List<Building> buildings;
 
-
     public User() {}
 
     public User(String password, String email, String firstName, String lastName) {
@@ -48,6 +44,11 @@ public class User {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+
+    public int getId() {
+        return id;
     }
 
     public String getFirstName() { return firstName; }
@@ -74,9 +75,7 @@ public class User {
         return admin;
     }
 
-    public void addBuilding(Building building) {
-        buildings.add(building); }
-
+    public List<Building> getBuildings() { return buildings; }
 
 
 }

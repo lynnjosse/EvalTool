@@ -3,18 +3,13 @@ package com.lynnjosse.EvalTool.Controllers;
 import com.lynnjosse.EvalTool.models.Building;
 import com.lynnjosse.EvalTool.models.User;
 import com.lynnjosse.EvalTool.models.dao.BuildingDao;
-import com.lynnjosse.EvalTool.models.dao.UserDao;
-import com.lynnjosse.EvalTool.models.forms.BldgAssignForm;
 import com.lynnjosse.EvalTool.models.forms.SelectForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.util.List;
 
 import static java.util.Collections.sort;
@@ -57,15 +52,20 @@ public class UserController extends AbstractController{
 //
 //        for (int userId : userIds) {
 //
-//
 //            //change user.admin to true
-//
 //            //save user
-//
 //        }
-//
 //        return "redirect:";
     //}
+
+    @RequestMapping(value = "view/{userId}", method = RequestMethod.GET)
+    public String viewMenu (Model model, @PathVariable int userId) {
+        User user = userDao.findOne(userId);
+        model.addAttribute("title", user.getFirstName());
+        model.addAttribute("buildings", user.getBuildings());
+        model.addAttribute("ID", user.getId());
+        return "user/view";
+    }
 
 
     @RequestMapping(value = "select", method = RequestMethod.GET)
@@ -96,30 +96,28 @@ public class UserController extends AbstractController{
                                         @RequestParam Integer userId,
                                         @RequestParam String streetname)  {
 
-
-
         List<Building> buildings = buildingDao.findByWardAndStreetname(wardNum, streetname);
 
         model.addAttribute ("title", "Select a building");
         model.addAttribute("buildings", buildings);
+        model.addAttribute("userId", userId);
 
         return "user/select-building";
     }
 
     @RequestMapping(value= "assign-building", method = RequestMethod.POST)
     public String assignBuildingToUser (Model model,
-                           @ModelAttribute @Valid BldgAssignForm form,
-                           Errors errors) {
-        if (errors.hasErrors()) {
-            model.addAttribute("form", form);
-            return "user/assign-building";
-        }
+                                        @RequestParam int buildingId,
+                                        @RequestParam Integer userId) {
+       // if (errors.hasErrors()) {
+         //   model.addAttribute("form", form);
+           // return "user/assign-building";        }
 
-        Building theBuilding = buildingDao.findOne(form.getBuildingId());
-        User theUser = userDao.findOne(form.getUserId());
-        theUser.addBuilding(theBuilding);
-        userDao.save(theUser);
-        return "redirect:/user/view/" + theUser.getId();
+        Building theBuilding = buildingDao.findOne(buildingId);
+        User theUser = userDao.findOne(userId);
+theBuilding.addUser(theUser);
+buildingDao.save(theBuilding);
+        return "redirect:/user/view/" + userId;
         //TODO: create redirect template//
 
     }
