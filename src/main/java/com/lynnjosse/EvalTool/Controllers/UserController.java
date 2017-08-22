@@ -22,6 +22,8 @@ public class UserController extends AbstractController{
     @Autowired
     private BuildingDao buildingDao;
 
+
+
     @RequestMapping(value = "index", method=RequestMethod.GET)
     public String index(HttpSession request, Model model){
 
@@ -83,11 +85,14 @@ public class UserController extends AbstractController{
     public String selectStreet(Model model, @RequestParam Integer wardNum, @RequestParam Integer userId) {
         List streets = buildingDao.findDistinctStreets(wardNum);
         sort(streets);
+        User theUser = userDao.findOne(userId);
+        String userName = theUser.getFirstName() + " " + theUser.getLastName();
+
         model.addAttribute("title", "Select a street");
         model.addAttribute("streets", streets);
         model.addAttribute("wardNum", wardNum);
         model.addAttribute("userId", userId);
-
+        model.addAttribute("userName", userName);
 
         return "user/select-street";
     }
