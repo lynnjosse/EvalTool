@@ -5,18 +5,14 @@
 <body class="container">
 
 <nav th:replace="fragments :: navigation"></nav>
+
 <h1 th:text="${title}">Default Title</h1>
-
-
-
 
 <p> Assigning Building to User <span th:text = "${userName}"></span></p>
 <p> Searching in Ward  <span th:text = "${wardNum}"></span></p>
 
 
-
 <form  method = "post" action="/user/select-building">
-
 
     <div class = "form-group" >
         <label>Street Name</label>

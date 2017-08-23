@@ -22,15 +22,12 @@ public class UserController extends AbstractController{
     @Autowired
     private BuildingDao buildingDao;
 
-
-
     @RequestMapping(value = "index", method=RequestMethod.GET)
     public String index(HttpSession request, Model model){
 
-
-        User user = getUserFromSession(request);
-        model.addAttribute("user", user);
-        model.addAttribute("title", user.getEmail());
+        User userFromSession = getUserFromSession(request);
+        model.addAttribute("userFromSession", userFromSession);
+        model.addAttribute("title", userFromSession.getEmail());
 
         return "user/index";
 
@@ -39,8 +36,12 @@ public class UserController extends AbstractController{
     }
 
     @RequestMapping(value = "add-admin", method = RequestMethod.GET)
-        public String displayAddAdmin(Model model) {
+        public String displayAddAdmin(HttpSession request, Model model) {
             model.addAttribute ("title", "Add admins");
+
+            User userFromSession = getUserFromSession(request);
+            model.addAttribute("userFromSession", userFromSession);
+
             Iterable<User> users = userDao.findAll();
             model.addAttribute("users" , users);
             return "user/add-admin";
@@ -61,10 +62,13 @@ public class UserController extends AbstractController{
     //}
 
     @RequestMapping(value = "view/{userId}", method = RequestMethod.GET)
-    public String viewMenu (Model model, @PathVariable int userId) {
+    public String viewMenu (HttpSession request, Model model, @PathVariable int userId) {
         User user = userDao.findOne(userId);
-        String name = user.getFirstName() + " " + user.getLastName();
-        model.addAttribute("title", name);
+        String title = user.getFirstName() + " " + user.getLastName() + "'s buildings";
+
+        User userFromSession = getUserFromSession(request);
+        model.addAttribute("userFromSession", userFromSession);
+        model.addAttribute("title", title);
         model.addAttribute("buildings", user.getBuildings());
         model.addAttribute("ID", user.getId());
         return "user/view";
@@ -72,21 +76,27 @@ public class UserController extends AbstractController{
 
 
     @RequestMapping(value = "select", method = RequestMethod.GET)
-        public String select(Model model) {
-          SelectForm form = new SelectForm (userDao.findAll(), buildingDao.findDistinctWards());
-            model.addAttribute("form", form);
-            model.addAttribute("title", "Select a User and Ward");
+     public String select(HttpSession request, Model model) {
+        SelectForm form = new SelectForm (userDao.findAll(), buildingDao.findDistinctWards());
+
+        User userFromSession = getUserFromSession(request);
+        model.addAttribute("userFromSession", userFromSession);
+        model.addAttribute("form", form);
+        model.addAttribute("title", "Select a User and Ward");
 
         return "user/select";
         }
 
 
     @RequestMapping(value = "select-street" , method = RequestMethod.POST)
-    public String selectStreet(Model model, @RequestParam Integer wardNum, @RequestParam Integer userId) {
+    public String selectStreet(HttpSession request, Model model, @RequestParam Integer wardNum, @RequestParam Integer userId) {
         List streets = buildingDao.findDistinctStreets(wardNum);
         sort(streets);
         User theUser = userDao.findOne(userId);
         String userName = theUser.getFirstName() + " " + theUser.getLastName();
+
+        User userFromSession = getUserFromSession(request);
+        model.addAttribute("userFromSession", userFromSession);
 
         model.addAttribute("title", "Select a street");
         model.addAttribute("streets", streets);
@@ -98,21 +108,29 @@ public class UserController extends AbstractController{
     }
 
     @RequestMapping(value = "select-building", method= RequestMethod.POST)
-    public String selectBuilding (Model model,  @RequestParam Integer wardNum,
+    public String selectBuilding (HttpSession request, Model model,  @RequestParam Integer wardNum,
                                         @RequestParam Integer userId,
                                         @RequestParam String streetname)  {
 
         List<Building> buildings = buildingDao.findByWardAndStreetname(wardNum, streetname);
+        User theUser = userDao.findOne(userId);
+        String userName = theUser.getFirstName() + " " + theUser.getLastName();
+
+        User userFromSession = getUserFromSession(request);
+        model.addAttribute("userFromSession", userFromSession);
 
         model.addAttribute ("title", "Select a building");
         model.addAttribute("buildings", buildings);
         model.addAttribute("userId", userId);
+        model.addAttribute("streetname", streetname);
+        model.addAttribute("wardNum", wardNum);
+        model.addAttribute("userName", userName);
 
         return "user/select-building";
     }
 
     @RequestMapping(value= "assign-building", method = RequestMethod.POST)
-    public String assignBuildingToUser (Model model,
+    public String assignBuildingToUser (HttpSession request, Model model,
                                         @RequestParam int buildingId,
                                         @RequestParam Integer userId) {
        // if (errors.hasErrors()) {
@@ -121,8 +139,8 @@ public class UserController extends AbstractController{
 
         Building theBuilding = buildingDao.findOne(buildingId);
         User theUser = userDao.findOne(userId);
-theBuilding.addUser(theUser);
-buildingDao.save(theBuilding);
+        theBuilding.addUser(theUser);
+        buildingDao.save(theBuilding);
         return "redirect:/user/view/" + userId;
         //TODO: create redirect template//
 

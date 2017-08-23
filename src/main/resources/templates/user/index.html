@@ -11,7 +11,7 @@
 
 <!-- TODO: add a list of all of the buildings assigned to this user-->
 
-    <div th:if="${user.admin}">
+    <div th:if="${userFromSession.admin}">
 
         <a href="/user/select">assign building</a>
         <br/>

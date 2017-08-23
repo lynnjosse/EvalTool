@@ -8,7 +8,9 @@
 
 <h1 th:text="${title}"></h1>
 
-
+<p> Assigning Building to User <span th:text = "${userName}"></span></p>
+<p> Searching in Ward  <span th:text = "${wardNum}"></span></p>
+<p> Searching by Street: <span th:text="${streetname}"></span></p>
 
 <form  method = "post" action = "/user/assign-building">
     <div class = "form-group">

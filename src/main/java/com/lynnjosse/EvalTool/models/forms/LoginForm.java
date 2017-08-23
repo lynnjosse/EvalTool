@@ -12,8 +12,6 @@ public class LoginForm {
     @Pattern(regexp = "(\\S){4,20}", message = "Password must have 4-20 non-whitespace characters")
     private String password;
 
-
-
     public LoginForm() {}
 
     public String getEmail() {
@@ -23,8 +21,6 @@ public class LoginForm {
     public void setEmail(String email) {
         this.email = email;
     }
-
-
 
     public String getPassword() {
         return password;
