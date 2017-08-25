@@ -14,37 +14,40 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Null;
+import java.util.List;
 
 
 @Controller
-@RequestMapping("eval")
-public class EvaluationController {
+@RequestMapping("evaluation")
+public class EvaluationController extends AbstractController {
 
     @Autowired
     public EvaluationDao evaluationDao;
 
     @Autowired
     public BuildingDao buildingDao;
-/*
-    @RequestMapping (value = "/buildingId", method = RequestMethod.GET)
+
+    @RequestMapping (value = "/{buildingId}", method = RequestMethod.GET)
     public String eval(HttpSession request, Model model, @PathVariable Integer buildingId) {
 
-        Evaluation evaluation = evaluationDao.findByRelatedBuildingId(buildingId);
-        Building building = buildingDao.findById(buildingId);
+       // List<Evaluation> evaluation = evaluationDao.findByRelatedBuildingId(buildingId);
+        Building building = buildingDao.findOne(buildingId);
+        String message = new String();
+        if (building.getRelatedEvaluation() == null) {
+            message = "No evaluation begun yet (I might need to put a button here to start one.";
+        } else {message = "";}
 
-
-        model.addAttribute("evaluation", evaluation);
+        model.addAttribute ("building", building);
+        model.addAttribute("evaluation", building.getRelatedEvaluation());
 
         model.addAttribute("title", "My Buildings");
 
+        model.addAttribute("message", message);
 
-        if (building.getRelatedEvaluation() == null) {
 
-        }
-
-        return "eval/";
+        return "evaluation";
 
     }
-    */
+
 
 }

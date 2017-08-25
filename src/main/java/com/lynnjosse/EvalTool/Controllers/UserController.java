@@ -33,7 +33,6 @@ public class UserController extends AbstractController{
 
         return "user/index";
 
-        //TODO: pass in list of buildings assigned to the user in session//
 
     }
 
@@ -113,7 +112,7 @@ public class UserController extends AbstractController{
     public String selectStreet(HttpSession request, Model model,
                                @RequestParam Integer wardNum, @RequestParam Integer userId) {
         List streets = buildingDao.findDistinctStreets(wardNum);
-        sort(streets);
+        //sort(streets);
         User user = userDao.findOne(userId);
         String userName = user.getFirstName() + " " + user.getLastName();
 
@@ -161,9 +160,7 @@ public class UserController extends AbstractController{
     public String assignBuildingToUser (HttpSession request, Model model,
                                         @RequestParam int buildingId,
                                         @RequestParam Integer userId) {
-       // if (errors.hasErrors()) {
-         //   model.addAttribute("form", form);
-           // return "user/assign-building";        }
+
 
         Building theBuilding = buildingDao.findOne(buildingId);
         User theUser = userDao.findOne(userId);

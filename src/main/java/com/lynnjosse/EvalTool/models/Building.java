@@ -10,36 +10,20 @@ public class Building {
     @Id
     @Column(name = "id")
     private int id;
-
     private int parcelId;
-
     private String address;
-
     private int ward;
-
     private int neighborhood;
-
     private int ass;
-
     private String bldgUse;
-
     private String description;
-
     private int bldgSF;
-
     private double frontage;
-
     private double side;
-
     private int lotSF;
-
     private int value;
-
     private int addrNum;
-
     private String streetname;
-
-
 
     @OneToOne
     private Evaluation relatedEvaluation;

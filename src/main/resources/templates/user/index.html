@@ -9,7 +9,6 @@
 
 <h1 th:text="${title}">Default Title</h1>
 
-<!-- TODO: add a list of all of the buildings assigned to this user-->
 
     <div th:if="${userFromSession.admin}">
 
@@ -26,7 +25,7 @@
     <table  class="table">
     <div th:each="building : ${buildings}">
 
-     <tr><a th:href=" 'evaluation/' + ${building.id}" th:text="${building.address}"></a></tr>
+     <tr><a th:href=" '/evaluation/' + ${building.id}" th:text="${building.address}"></a></tr>
     </div>
 
 
