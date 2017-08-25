@@ -39,6 +39,8 @@ public class Building {
 
     private String streetname;
 
+
+
     @OneToOne
     private Evaluation relatedEvaluation;
 
@@ -109,6 +111,14 @@ public class Building {
 
     public void addUser(User user) {
         users.add(user); }
+
+    public Evaluation getRelatedEvaluation() {
+        return relatedEvaluation;
+    }
+
+    public void setRelatedEvaluation(Evaluation relatedEvaluation) {
+        this.relatedEvaluation = relatedEvaluation;
+    }
 }
 
 

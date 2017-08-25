@@ -10,7 +10,6 @@ import java.util.List;
 
 public class SelectForm {
     private Iterable<User> userList;
-    private List<Integer> wardList;
 
     public Iterable<User> getUserList() {
         return userList;
@@ -20,18 +19,11 @@ public class SelectForm {
         this.userList = userList;
     }
 
-    public List<Integer> getWardList() {
-        return wardList;
-    }
-
-    public void setWardList(List<Integer> wardList) {
-        this.wardList = wardList;
-    }
 
     public SelectForm() {    }
 
-    public SelectForm(Iterable<User> userList,  List<Integer> wardList) {
+    public SelectForm(Iterable<User> userList) {
         this.userList = userList;
-        this.wardList = wardList;
+
     }
 }

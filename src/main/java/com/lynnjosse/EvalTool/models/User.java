@@ -77,6 +77,11 @@ public class User {
 
     public List<Building> getBuildings() { return buildings; }
 
+    public String toString() {
+        if (isAdmin()) {
+            return firstName + " " + lastName + " (admin)";}
+        else {
+            return firstName + " " + lastName;}
 
+    }
 }
-

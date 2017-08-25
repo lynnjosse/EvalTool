@@ -13,6 +13,8 @@ import java.util.List;
 @Repository
 public interface BuildingDao extends CrudRepository<Building, Integer> {
 
+    public Building findById(Integer buildingId);
+
     public List<Building> findByWard (Integer ward);
     public List<Building> findByStreetname(String streetname);
     public List<Building> findByWardAndStreetname (Integer ward, String streetname);

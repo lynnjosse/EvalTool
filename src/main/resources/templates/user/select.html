@@ -8,11 +8,9 @@
 <h1 th:text="${title}">Default Title</h1>
 <!--TODO: display users with links to their individual assign-building pages-->
 <!--TODO later: include the assigned buildings or number of buildings next to user name-->
-<!--TODO: display user full name-->
 
 
-
-<form  th:object="${form}"  method = "post" action = "/user/select-street">
+<form  th:object="${form}"  method = "post" action = "/user/select-ward">
     <div class = "form-group">
         <label th:for="User">User</label>
         <select name = "userId">
@@ -22,16 +20,7 @@
         </select>
     </div>
 
-    <div class = "form-group">
-        <label th:for="ward">Ward</label>
-        <select name = "wardNum">
-            <option th:each="wardNum:*{wardList}"
-                    th:text="${wardNum}"
-                    th:value="${wardNum}"></option>
-        </select>
-    </div>
-
-    <input type = "submit" value="Do This Now" />
+    <input type = "submit" value="Select User" />
 
 </form>
 

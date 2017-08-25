@@ -22,12 +22,14 @@ public class UserController extends AbstractController{
     @Autowired
     private BuildingDao buildingDao;
 
+
     @RequestMapping(value = "index", method=RequestMethod.GET)
     public String index(HttpSession request, Model model){
 
         User userFromSession = getUserFromSession(request);
+        model.addAttribute("buildings", userFromSession.getBuildings());
         model.addAttribute("userFromSession", userFromSession);
-        model.addAttribute("title", userFromSession.getEmail());
+        model.addAttribute("title", "Welcome, " + userFromSession);
 
         return "user/index";
 
@@ -74,35 +76,58 @@ public class UserController extends AbstractController{
         return "user/view";
     }
 
-
     @RequestMapping(value = "select", method = RequestMethod.GET)
-     public String select(HttpSession request, Model model) {
-        SelectForm form = new SelectForm (userDao.findAll(), buildingDao.findDistinctWards());
+    public String select(HttpSession request, Model model) {
+        SelectForm form = new SelectForm (userDao.findAll());
 
         User userFromSession = getUserFromSession(request);
         model.addAttribute("userFromSession", userFromSession);
         model.addAttribute("form", form);
-        model.addAttribute("title", "Select a User and Ward");
+        model.addAttribute("title", "Select a User");
 
         return "user/select";
         }
 
-
-    @RequestMapping(value = "select-street" , method = RequestMethod.POST)
-    public String selectStreet(HttpSession request, Model model, @RequestParam Integer wardNum, @RequestParam Integer userId) {
-        List streets = buildingDao.findDistinctStreets(wardNum);
-        sort(streets);
-        User theUser = userDao.findOne(userId);
-        String userName = theUser.getFirstName() + " " + theUser.getLastName();
+    @RequestMapping(value = "select-ward", method = RequestMethod.POST)
+    public String selectWard(HttpSession request, Model model, @RequestParam Integer userId) {
+        List wardList = buildingDao.findDistinctWards();
+        User user = userDao.findOne(userId);
+        String userName = user.getFirstName() + " " + user.getLastName();
 
         User userFromSession = getUserFromSession(request);
         model.addAttribute("userFromSession", userFromSession);
+
+        model.addAttribute("buildings", user.getBuildings());
+
+        model.addAttribute("title", "Select a ward");
+        model.addAttribute("wardList", wardList);
+        model.addAttribute("userId", userId);
+        model.addAttribute("userName", userName);
+        model.addAttribute("user", user);
+
+        return "user/select-ward";
+
+    }
+
+    @RequestMapping(value = "select-street" , method = RequestMethod.POST)
+    public String selectStreet(HttpSession request, Model model,
+                               @RequestParam Integer wardNum, @RequestParam Integer userId) {
+        List streets = buildingDao.findDistinctStreets(wardNum);
+        sort(streets);
+        User user = userDao.findOne(userId);
+        String userName = user.getFirstName() + " " + user.getLastName();
+
+        User userFromSession = getUserFromSession(request);
+        model.addAttribute("userFromSession", userFromSession);
+
+        model.addAttribute("buildings", user.getBuildings());
 
         model.addAttribute("title", "Select a street");
         model.addAttribute("streets", streets);
         model.addAttribute("wardNum", wardNum);
         model.addAttribute("userId", userId);
         model.addAttribute("userName", userName);
+        model.addAttribute("user", user);
 
         return "user/select-street";
     }
@@ -112,19 +137,22 @@ public class UserController extends AbstractController{
                                         @RequestParam Integer userId,
                                         @RequestParam String streetname)  {
 
-        List<Building> buildings = buildingDao.findByWardAndStreetname(wardNum, streetname);
-        User theUser = userDao.findOne(userId);
-        String userName = theUser.getFirstName() + " " + theUser.getLastName();
+        List<Building> buildingsByWardAndStreetName = buildingDao.findByWardAndStreetname(wardNum, streetname);
+        User user = userDao.findOne(userId);
+        String userName = user.getFirstName() + " " + user.getLastName();
 
         User userFromSession = getUserFromSession(request);
         model.addAttribute("userFromSession", userFromSession);
 
+        model.addAttribute("buildings", user.getBuildings());
         model.addAttribute ("title", "Select a building");
-        model.addAttribute("buildings", buildings);
+        model.addAttribute("buildingsFiltered", buildingsByWardAndStreetName);
         model.addAttribute("userId", userId);
         model.addAttribute("streetname", streetname);
         model.addAttribute("wardNum", wardNum);
         model.addAttribute("userName", userName);
+
+        model.addAttribute("user", user);
 
         return "user/select-building";
     }

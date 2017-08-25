@@ -11,28 +11,19 @@
 
 
 <!--
-
 TODO: long-term, I would like to know if the building has other users assigned to it as well
-and add links
-
-
 -->
+
 <h3>Someday, not all that long from now, this list will link to the evaluation form!</h3>
-
-
+<h4>Still to do: links to assign additional buildings</h4>
+<!--TODO: what I say above-->
 
 <ul>
     <li th:each = "building:${buildings}" th:text="${building.address}"></li>
 </ul>
 
-<p th:unless="${buildings.size()}">No buildings on the list</p>
+<p th:unless="${buildings.size()}">No buildings assigned to this user yet</p>
 
-
-<!--
-<p>
-    <a th:href ="'/user/assign-building/'+${userId}">Assign Building</a>
-</p>
--->
 
 </body>
 </html>

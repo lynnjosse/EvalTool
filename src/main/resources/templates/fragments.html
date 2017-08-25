@@ -5,6 +5,7 @@
     <title th:text="${title}"></title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/resources/static/css/site-specific.css" />
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
@@ -15,27 +16,30 @@
 <div th:fragment="navigation">
 
     <div th:if="${userFromSession}">
-
-        <!-- Nav section for logged-in users -->
-
         <nav class="user-nav">
-            user in session: <span th:text="${userFromSession.email}"></span> |
+            user in session: <span th:text="${userFromSession.toString()}"></span> |
             <a href="/logout">Log Out</a>
         </nav>
-
     </div>
 
     <div th:unless="${userFromSession}">
-
-        <!-- Nav section for users that aren't logged in -->
-
         <nav>
             <a href="/login">Log In</a> |
             <a href="/register">Register</a>
         </nav>
-
     </div>
 
+</div>
+
+<div th:fragment="userBuildings">
+
+    <h4>Buildings assigned to <span th:text="${user.toString()}"></span></h4>
+
+    <ul>
+        <li th:each = "building:${buildings}" th:text="${building.address}"></li>
+    </ul>
+
+    <p th:unless="${buildings.size()}">No buildings assigned to this user yet</p>
 </div>
 
 </body>
