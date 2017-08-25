@@ -29,7 +29,7 @@ public class EvaluationController {
     @RequestMapping (value = "/buildingId", method = RequestMethod.GET)
     public String eval(HttpSession request, Model model, @PathVariable Integer buildingId) {
 
-        Evaluation evaluation = evaluationDao.findByRelated_building_id(buildingId);
+        Evaluation evaluation = evaluationDao.findByRelatedBuildingId(buildingId);
         Building building = buildingDao.findById(buildingId);
 
 

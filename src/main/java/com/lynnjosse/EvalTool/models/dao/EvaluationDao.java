@@ -12,5 +12,5 @@ import java.util.List;
 @Repository
 public interface EvaluationDao extends CrudRepository<Evaluation, Integer> {
 
-    //List<Evaluation> findByRelated-building-id(Integer buildingId);
+  List<Evaluation> findByRelatedBuildingId(Integer buildingId);
 }

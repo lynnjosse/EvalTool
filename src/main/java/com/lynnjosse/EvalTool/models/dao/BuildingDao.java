@@ -22,6 +22,6 @@ public interface BuildingDao extends CrudRepository<Building, Integer> {
 @Query(value = "select distinct ward from building" , nativeQuery = true)
 List<Integer> findDistinctWards();
 
-@Query(value = "select distinct streetname from building where ward= ?1" , nativeQuery = true)
+@Query(value = "select distinct streetname from building where ward= ?1 order by ward asc" , nativeQuery = true)
 List<String> findDistinctStreets(Integer wardNum);
 }
