@@ -26,12 +26,13 @@ public class Building {
     private String streetname;
 
     @OneToOne
+    @JoinColumn(name="related_evalustion_id")
     private Evaluation relatedEvaluation;
 
     @ManyToMany
     private List<User> users;
 
-    public Building (){}
+    public Building(){}
 
     public int getId() {
         return id;

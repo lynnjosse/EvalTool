@@ -36,3 +36,5 @@ public abstract class AbstractController {
     }
 
 }
+//TODO: refactor all other controllers to reflect that this gets the user from session?
+//and rename from user to userFromSession?
