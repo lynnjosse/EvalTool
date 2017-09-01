@@ -31,9 +31,9 @@ public class UserController extends AbstractController{
         model.addAttribute("userFromSession", userFromSession);
         model.addAttribute("title", "Welcome, " + userFromSession);
 
+
+
         return "user/index";
-
-
     }
 
     @RequestMapping(value = "add-admin", method = RequestMethod.GET)
@@ -97,7 +97,6 @@ public class UserController extends AbstractController{
         model.addAttribute("userFromSession", userFromSession);
 
         model.addAttribute("buildings", user.getBuildings());
-
         model.addAttribute("title", "Select a ward");
         model.addAttribute("wardList", wardList);
         model.addAttribute("userId", userId);
@@ -105,7 +104,6 @@ public class UserController extends AbstractController{
         model.addAttribute("user", user);
 
         return "user/select-ward";
-
     }
 
     @RequestMapping(value = "select-street" , method = RequestMethod.POST)

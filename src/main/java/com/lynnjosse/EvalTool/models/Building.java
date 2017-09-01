@@ -1,6 +1,5 @@
 package com.lynnjosse.EvalTool.models;
 
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,11 +9,13 @@ public class Building {
     @Id
     @Column(name = "id")
     private int id;
-    private int parcelId;
+
+    @Column (name = "parcelId")
+    private long parcelId;
+
     private String address;
     private int ward;
     private int neighborhood;
-    private int ass;
     private String bldgUse;
     private String description;
     private int bldgSF;
@@ -26,19 +27,21 @@ public class Building {
     private String streetname;
 
     @OneToOne
-    @JoinColumn(name="related_evalustion_id")
+    @JoinColumn(name="id")
     private Evaluation relatedEvaluation;
+    //updated from name="related_evaluation_id"9/1
 
     @ManyToMany
     private List<User> users;
 
+
     public Building(){}
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public int getParcelId() {
+    public long getParcelId() {
         return parcelId;
     }
 
@@ -52,10 +55,6 @@ public class Building {
 
     public int getNeighborhood() {
         return neighborhood;
-    }
-
-    public int getAss() {
-        return ass;
     }
 
     public String getBldgUse() {
@@ -86,13 +85,9 @@ public class Building {
         return value;
     }
 
-    public int getAddrNum() {
-        return addrNum;
-    }
+    public int getAddrNum() {  return addrNum;  }
 
-    public String getStreetname() {
-        return streetname;
-    }
+    public String getStreetname() {return streetname;}
 
     public void addUser(User user) {
         users.add(user); }
@@ -103,6 +98,10 @@ public class Building {
 
     public void setRelatedEvaluation(Evaluation relatedEvaluation) {
         this.relatedEvaluation = relatedEvaluation;
+    }
+
+    public List<User> getUsers() {
+        return users;
     }
 }
 

@@ -26,10 +26,11 @@
     <div th:each="building : ${buildings}">
 
      <tr><a th:href=" '/evaluation/' + ${building.id}" th:text="${building.address}"></a></tr>
+
+        <form th:if="${building.relatedEvaluation.id} == null" type =
     </div>
 
 
-    </table>
 
 
 </body>

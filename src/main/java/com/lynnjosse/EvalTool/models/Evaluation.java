@@ -25,7 +25,6 @@ public class Evaluation {
     @OneToOne (mappedBy = "relatedEvaluation")
     public Building relatedBuilding;
 
-
     public Evaluation() {}
 
     public int getId() {

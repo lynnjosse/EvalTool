@@ -13,15 +13,15 @@ import java.util.List;
 @Repository
 public interface BuildingDao extends CrudRepository<Building, Integer> {
 
-    public Building findById(Integer buildingId);
 
-    public List<Building> findByWard (Integer ward);
-    public List<Building> findByStreetname(String streetname);
-    public List<Building> findByWardAndStreetname (Integer ward, String streetname);
+  //public List<Building> findByWardAndStreetname (Integer ward, String streetname);
+
+ @Query(value="select * from building where ward = ?1 and streetname = ?2" , nativeQuery = true)
+ List<Building> findByWardAndStreetname (Integer ward, String streetname);
+
 
 @Query(value = "select distinct ward from building" , nativeQuery = true)
 List<Integer> findDistinctWards();
 
 @Query(value = "select distinct streetname from building where ward= ?1 order by ward asc" , nativeQuery = true)
-List<String> findDistinctStreets(Integer wardNum);
-}
+List<String> findDistinctStreets(Integer wardNum); }
