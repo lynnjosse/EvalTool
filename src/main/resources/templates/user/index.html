@@ -25,12 +25,20 @@
     <table  class="table">
     <div th:each="building : ${buildings}">
 
-     <tr><a th:href=" '/evaluation/' + ${building.id}" th:text="${building.address}"></a></tr>
+     <tr>
+         <td th:text="${building.address}"></td>
 
-        <form th:if="${building.relatedEvaluation.id} == null" type =
+         <td>
+            <form th:if="${building.relatedEvaluation} == null" action = "/evaluation/create">
+                <input type = "hidden" name = "buildingId" th:value = "${building.id}"/>
+                <input type = "submit" value = "Create Evaluation"/>
+            </form>
+         </td>
+
+     </tr>
     </div>
 
-
+    </table>
 
 
 </body>

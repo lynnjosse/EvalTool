@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body class="container">
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<h1 th:text="${title}">Default Title</h1>
+
+<table>
+    <tr>
+        <td th:text="${building.address}">        </td>
+    </tr>
+    <tr>
+        <td>Ward</td>
+        <td th:text="${building.ward}"></td>
+    </tr>
+    <tr>
+        <td>Description</td>
+        <td th:text="${building.description}"></td>
+    </tr>
+    <tr>
+        <td>Handle</td>
+        <td th:text="${building.parcelId}"></td>
+    </tr>
+    <tr>
+        <td>Use</td>
+        <td th:text="${building.bldgUse}"></td>
+    </tr>
+    <tr>
+        <td>Neighborhood</td>
+        <td th:text="${building.neighborhood}"></td>
+    </tr>
+    <tr>
+        <td>Building square feet</td>
+        <td th:text="${building.bldgSF}"></td>
+
+    </tr>
+</table>
+
+<form th:object="${evaluation}">
+
+    <label for="userDescription">Description</label>
+    <textarea name="userDescription" id = "userDescription" value="*{userDescription}"></textarea>
+
+    <br/>
+    <label for="collapse">Any substantive collapse?</label>
+    <input type = "checkbox" name = "collapse" id = "collapse" th:value = "*{collapse}"/>
+
+    <br/>
+    <label for="collapseNotes">Describe the collapse (leave blank if no collapse)</label>
+    <textarea name="collapseNotes" id = "collapseNotes" value="*{collapseNotes}"></textarea>
+
+    <br/>
+    <label for="boardSecure">Is the first floor securely boarded?</label>
+    <input type = "checkbox" name = "boardSecure" id = "boardSecure" th:value = "*{boardSecure}"/>
+
+    <br/>
+    <label for="boardNotes">Notes on the board-up</label>
+    <textarea name="boardNotes" id = "boardNotes" value="*{boardNotes}"></textarea>
+
+    <br/>
+    <label for="roofNotes">Notes on the roof condition (if visible)</label>
+    <textarea name="roofNotes" id = "roofNotes" value="*{roofNotes}"></textarea>
+
+    <br/>
+    <label for="gutterNotes">Notes on gutters (icluding whether any are present)</label>
+    <textarea name="gutterNotes" id = "gutterNotes" value="*{gutterNotes}"></textarea>
+
+    <br/>
+    <label for="envirNotes">Notes on the lot</label>
+    <textarea name="envirNotes" id = "envirNotes" value="*{envirNotes}"></textarea>
+
+    <br/>
+    <label for = "numOutbuildings">Number of outbuildings</label>
+    <input type = "text" name = "numOutbuildings" id = "numOutbuildings" value = "*{numOutbuildings}"/>
+
+    <br/>
+    <label for="outbuildingNotes">Notes on the outbuilding(s)</label>
+    <textarea name="outbuildingNotes" id = "outbuildingNotes" value="*{outbuildingNotes}"></textarea>
+
+    <br/>
+
+    <input type = "submit" value = "Submit Evaluation"/>
+
+</form>
+
+</body>

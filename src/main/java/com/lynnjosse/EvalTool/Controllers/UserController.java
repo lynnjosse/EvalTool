@@ -22,7 +22,6 @@ public class UserController extends AbstractController{
     @Autowired
     private BuildingDao buildingDao;
 
-
     @RequestMapping(value = "index", method=RequestMethod.GET)
     public String index(HttpSession request, Model model){
 
@@ -30,8 +29,6 @@ public class UserController extends AbstractController{
         model.addAttribute("buildings", userFromSession.getBuildings());
         model.addAttribute("userFromSession", userFromSession);
         model.addAttribute("title", "Welcome, " + userFromSession);
-
-
 
         return "user/index";
     }
@@ -97,6 +94,7 @@ public class UserController extends AbstractController{
         model.addAttribute("userFromSession", userFromSession);
 
         model.addAttribute("buildings", user.getBuildings());
+
         model.addAttribute("title", "Select a ward");
         model.addAttribute("wardList", wardList);
         model.addAttribute("userId", userId);
@@ -104,6 +102,7 @@ public class UserController extends AbstractController{
         model.addAttribute("user", user);
 
         return "user/select-ward";
+
     }
 
     @RequestMapping(value = "select-street" , method = RequestMethod.POST)

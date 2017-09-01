@@ -18,6 +18,8 @@ public class BuildingController {
     public String index(Model model) {
         model.addAttribute("buildings", buildingDao.findAll());
         model.addAttribute("title", "All Buildings");
+
+
         return "building/index";
     }
 }

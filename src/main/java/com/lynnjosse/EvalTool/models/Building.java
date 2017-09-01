@@ -27,9 +27,9 @@ public class Building {
     private String streetname;
 
     @OneToOne
-    @JoinColumn(name="id")
+    @JoinColumn(name="related_evaluation_id")
     private Evaluation relatedEvaluation;
-    //updated from name="related_evaluation_id"9/1
+    //updated to id from name="related_evaluation_id"9/1
 
     @ManyToMany
     private List<User> users;

@@ -27,27 +27,26 @@ public class EvaluationController extends AbstractController {
     @Autowired
     public BuildingDao buildingDao;
 
-    @RequestMapping (value = "/{buildingId}", method = RequestMethod.GET)
-    public String eval(HttpSession request, Model model, @PathVariable Integer buildingId) {
-
-       // List<Evaluation> evaluation = evaluationDao.findByRelatedBuildingId(buildingId);
+    @RequestMapping(value = "create", method = RequestMethod.GET)
+    public String createEvaluation(@RequestParam Integer buildingId) {
+        Evaluation newEvaluation = new Evaluation();
         Building building = buildingDao.findOne(buildingId);
-        String message = new String();
-        if (building.getRelatedEvaluation() == null) {
-            message = "No evaluation begun yet (I might need to put a button here to start one.";
-        } else {message = "";}
-
-        model.addAttribute ("building", building);
-        model.addAttribute("evaluation", building.getRelatedEvaluation());
-
-        model.addAttribute("title", "My Buildings");
-
-        model.addAttribute("message", message);
-
-
-        return "evaluation";
-
+        newEvaluation.setRelatedBuilding(building);
+        building.setRelatedEvaluation(newEvaluation);
+        evaluationDao.save(newEvaluation);
+        buildingDao.save(building);
+        return "evaluation/edit/{buildingId}";
     }
 
+    @RequestMapping (value = "edit/{buildingId}", method = RequestMethod.GET)
+    public String editEvaluation(HttpSession request, Model model, @PathVariable Integer buildingId) {
+        Building building = buildingDao.findOne(buildingId);
+        model.addAttribute ("building", building);
+        model.addAttribute("evaluation", building.getRelatedEvaluation());
+        model.addAttribute("title", building.getAddress());
+
+        return "evaluation/edit/{buildingId}";
+
+    }
 
 }

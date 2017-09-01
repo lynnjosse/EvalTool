@@ -9,7 +9,6 @@ public class Evaluation {
     @Id
     @GeneratedValue
     private int id;
-
     private String userDescription;
     private boolean collapse;
     private String collapseNotes;
@@ -22,8 +21,14 @@ public class Evaluation {
     private int numOfOutbuildings;
     private String outbuildingNotes;
 
-    @OneToOne (mappedBy = "relatedEvaluation")
-    public Building relatedBuilding;
+    @OneToOne// (mappedBy = "relatedEvaluation")
+    @JoinColumn(name="related_building_id")
+    private Building relatedBuilding;
+
+    //@OneToOne
+    //@JoinColumn(name = "id")
+   // @MapsId
+    //private Post post;
 
     public Evaluation() {}
 
