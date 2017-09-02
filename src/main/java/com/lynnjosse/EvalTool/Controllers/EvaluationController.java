@@ -35,7 +35,7 @@ public class EvaluationController extends AbstractController {
         building.setRelatedEvaluation(newEvaluation);
         evaluationDao.save(newEvaluation);
         buildingDao.save(building);
-        return "evaluation/edit/{buildingId}";
+        return "redirect:edit/" + buildingId;
     }
 
     @RequestMapping (value = "edit/{buildingId}", method = RequestMethod.GET)
@@ -45,7 +45,9 @@ public class EvaluationController extends AbstractController {
         model.addAttribute("evaluation", building.getRelatedEvaluation());
         model.addAttribute("title", building.getAddress());
 
-        return "evaluation/edit/{buildingId}";
+        return "evaluation/edit";
+
+
 
     }
 
