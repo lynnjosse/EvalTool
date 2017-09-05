@@ -1,0 +1,10 @@
+
+body {
+    background-color: lightblue;
+}
+
+
+nav {  margin-bottom: 20px; }
+
+.textarea div {rows: 3;
+    columns:50;}

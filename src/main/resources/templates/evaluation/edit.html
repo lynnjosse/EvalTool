@@ -39,51 +39,62 @@
     </tr>
 </table>
 
-<form th:object="${evaluation}">
+<form method = "post" th:object="${evaluation}" >
 
-    <label for="userDescription">Description</label>
-    <textarea name="userDescription" id = "userDescription" value="*{userDescription}"></textarea>
+    <div class="form-group">
+        <label for="userDescription">Description</label>
+        <textarea name="userDescription" id = "userDescription" value="*{userDescription}"></textarea>
+    </div>
 
-    <br/>
-    <label for="collapse">Any substantive collapse?</label>
-    <input type = "checkbox" name = "collapse" id = "collapse" th:value = "*{collapse}"/>
+    <div class="form-check">
+        <label class="form-check-label" for="collapse">Any substantive collapse?</label>
+        <input type = "checkbox" class="form-check-input" name = "collapse" id = "collapse" th:value = "*{collapse}"/>
+    </div>
 
-    <br/>
-    <label for="collapseNotes">Describe the collapse (leave blank if no collapse)</label>
-    <textarea name="collapseNotes" id = "collapseNotes" value="*{collapseNotes}"></textarea>
+    <div class="form-group">
+    <label>Describe the collapse (leave blank if no collapse)</label>
+    <textarea th:field="*{collapseNotes}"></textarea>
+    </div>
 
-    <br/>
-    <label for="boardSecure">Is the first floor securely boarded?</label>
-    <input type = "checkbox" name = "boardSecure" id = "boardSecure" th:value = "*{boardSecure}"/>
 
-    <br/>
-    <label for="boardNotes">Notes on the board-up</label>
-    <textarea name="boardNotes" id = "boardNotes" value="*{boardNotes}"></textarea>
+    <div class="form-check">
+        <label >Is the first floor securely boarded?    </label>
+            <input type="checkbox"  th:field = "*{boardSecure}" value = "1"/>
+    </div>
 
-    <br/>
-    <label for="roofNotes">Notes on the roof condition (if visible)</label>
-    <textarea name="roofNotes" id = "roofNotes" value="*{roofNotes}"></textarea>
+    <div class="form-group">
+        <label for="boardNotes">Notes on the board-up</label>
+        <textarea name="boardNotes" id = "boardNotes" value="*{boardNotes}"></textarea>
+    </div>
 
-    <br/>
-    <label for="gutterNotes">Notes on gutters (icluding whether any are present)</label>
-    <textarea name="gutterNotes" id = "gutterNotes" value="*{gutterNotes}"></textarea>
+    <div class="form-group">
+        <label for="roofNotes">Notes on the roof condition (if visible)</label>
+        <textarea name="roofNotes" id = "roofNotes" value="*{roofNotes}"></textarea>
+    </div>
 
-    <br/>
-    <label for="envirNotes">Notes on the lot</label>
-    <textarea name="envirNotes" id = "envirNotes" value="*{envirNotes}"></textarea>
+    <div class="form-group">
+        <label for="gutterNotes">Notes on gutters (including whether any are present)</label>
+        <textarea name="gutterNotes" id = "gutterNotes" value="*{gutterNotes}"></textarea>
+    </div>
 
-    <br/>
-    <label for = "numOutbuildings">Number of outbuildings</label>
-    <input type = "text" name = "numOutbuildings" id = "numOutbuildings" value = "*{numOutbuildings}"/>
+    <div class="form-group">
+        <label>Notes on the lot</label>
+        <textarea field="*{envirNotes}"></textarea>
+    </div>
 
-    <br/>
-    <label for="outbuildingNotes">Notes on the outbuilding(s)</label>
-    <textarea name="outbuildingNotes" id = "outbuildingNotes" value="*{outbuildingNotes}"></textarea>
+    <div class="form-group">
+        <label>Number of outbuildings</label>
+        <input type = "text" th:field = "*{numOfOutbuildings}" />
+    </div>
 
-    <br/>
+    <div class="form-group">
+        <label for="outbuildingNotes">Notes on the outbuilding(s)</label>
+        <textarea class="textarea" name="outbuildingNotes" id = "outbuildingNotes"  ></textarea>
+    </div>
 
     <input type = "submit" value = "Submit Evaluation"/>
 
 </form>
 
 </body>
+</html>

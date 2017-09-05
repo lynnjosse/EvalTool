@@ -1,16 +1,14 @@
 package com.lynnjosse.EvalTool.Controllers;
 
 import com.lynnjosse.EvalTool.models.Building;
+import com.lynnjosse.EvalTool.models.User;
 import com.lynnjosse.EvalTool.models.dao.BuildingDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import com.lynnjosse.EvalTool.models.Evaluation;
 import com.lynnjosse.EvalTool.models.dao.EvaluationDao;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Null;
@@ -38,17 +36,37 @@ public class EvaluationController extends AbstractController {
         return "redirect:edit/" + buildingId;
     }
 
+//(HttpSession request, Model model){
+
+  //      User userFromSession = getUserFromSession(request);
+    //    model.addAttribute("buildings", userFromSession.getBuildings());
+      //  model.addAttribute("userFromSession", userFromSession);
+
+
     @RequestMapping (value = "edit/{buildingId}", method = RequestMethod.GET)
-    public String editEvaluation(HttpSession request, Model model, @PathVariable Integer buildingId) {
+    public String displayEditEvaluation(HttpSession request, Model model, @PathVariable Integer buildingId) {
         Building building = buildingDao.findOne(buildingId);
         model.addAttribute ("building", building);
         model.addAttribute("evaluation", building.getRelatedEvaluation());
         model.addAttribute("title", building.getAddress());
+        User userFromSession = getUserFromSession(request);
+        model.addAttribute("userFromSession", userFromSession);
 
         return "evaluation/edit";
+    }
+
+    @RequestMapping (value = "edit/{buildingId}", method = RequestMethod.POST)
+    public String processEditEvaluation(@ModelAttribute Evaluation evaluation, HttpSession request, Model model) {
 
 
+        User userFromSession = getUserFromSession(request);
+        model.addAttribute("userFromSession", userFromSession);
+
+        model.addAttribute("buildings", userFromSession.getBuildings());
+        evaluationDao.save(evaluation);
+        return "redirect:/user/index";
 
     }
+
 
 }

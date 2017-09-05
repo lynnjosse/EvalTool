@@ -29,7 +29,6 @@ public class UserController extends AbstractController{
         model.addAttribute("buildings", userFromSession.getBuildings());
         model.addAttribute("userFromSession", userFromSession);
         model.addAttribute("title", "Welcome, " + userFromSession);
-
         return "user/index";
     }
 
