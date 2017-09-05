@@ -33,6 +33,10 @@
                 <input type = "hidden" name = "buildingId" th:value = "${building.id}"/>
                 <input type = "submit" value = "Create Evaluation"/>
             </form>
+             <form th:unless="${building.relatedEvaluation} == null" action = "/evaluation/edit/{buildingId}">
+                 <!--<input type = "hidden" name = "buildingId" th:value = "${building.id}"/> -->
+                 <input type = "submit" value = "Edit Evaluation"/>
+             </form>
          </td>
 
      </tr>

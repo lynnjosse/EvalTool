@@ -18,11 +18,19 @@ TODO: long-term, I would like to know if the building has other users assigned t
 <h4>Still to do: links to assign additional buildings</h4>
 <!--TODO: what I say above-->
 
-<ul>
-    <li th:each = "building:${buildings}" th:text="${building.address}"></li>
-</ul>
+<form method="post">
+    <div th:each = "building:${buildings}" class = "checkbox">
+        <input type="checkbox" name="buildingIds" th:value="${building.id}" th:id="${building.id}"/>
+        <label th:for="${building.id}"
+                th:text="${building.address}">
+        </label>
+    </div>
+
+    <input type = "submit" value = "Remove Buildings from user" />
+</form>
 
 <p th:unless="${buildings.size()}">No buildings assigned to this user yet</p>
+
 
 
 </body>

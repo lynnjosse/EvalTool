@@ -76,6 +76,13 @@ public class User {
 
     public List<Building> getBuildings() { return buildings; }
 
+
+    public void removeFromBuilding(Building building) {
+        this.getBuildings().remove(building);
+        building.getUsers().remove(this);
+    }
+
+
     public String toString() {
         if (isAdmin()) {
             return firstName + " " + lastName + " (admin)";}

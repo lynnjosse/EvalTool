@@ -71,6 +71,23 @@ public class UserController extends AbstractController{
         return "user/view";
     }
 
+    @RequestMapping(value = "view/{userId}", method = RequestMethod.POST)
+    public String processRemoval (@RequestParam int[] buildingIds, HttpSession request, Model model, @PathVariable int userId) {
+        User user = userDao.findOne(userId);
+        User userFromSession = getUserFromSession(request);
+        model.addAttribute("userFromSession", userFromSession);
+       // model.addAttribute("title", title);
+        model.addAttribute("buildings", user.getBuildings());
+        model.addAttribute("ID", user.getId());
+        for (int buildingId : buildingIds) {
+
+            Building building = buildingDao.findOne(buildingId);
+            user.removeFromBuilding(building);
+        }
+        return "user/view";
+    }
+
+
     @RequestMapping(value = "select", method = RequestMethod.GET)
     public String select(HttpSession request, Model model) {
         SelectForm form = new SelectForm (userDao.findAll());
@@ -163,7 +180,7 @@ public class UserController extends AbstractController{
         theBuilding.addUser(theUser);
         buildingDao.save(theBuilding);
         return "redirect:/user/view/" + userId;
-        //TODO: create redirect template//
+
 
     }
 
