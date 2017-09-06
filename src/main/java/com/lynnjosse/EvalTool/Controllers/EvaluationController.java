@@ -36,13 +36,6 @@ public class EvaluationController extends AbstractController {
         return "redirect:edit/" + buildingId;
     }
 
-//(HttpSession request, Model model){
-
-  //      User userFromSession = getUserFromSession(request);
-    //    model.addAttribute("buildings", userFromSession.getBuildings());
-      //  model.addAttribute("userFromSession", userFromSession);
-
-
     @RequestMapping (value = "edit/{buildingId}", method = RequestMethod.GET)
     public String displayEditEvaluation(HttpSession request, Model model, @PathVariable Integer buildingId) {
         Building building = buildingDao.findOne(buildingId);
@@ -51,16 +44,18 @@ public class EvaluationController extends AbstractController {
         model.addAttribute("title", building.getAddress());
         User userFromSession = getUserFromSession(request);
         model.addAttribute("userFromSession", userFromSession);
-
+        model.addAttribute("buildingId", buildingId);
         return "evaluation/edit";
     }
 
     @RequestMapping (value = "edit/{buildingId}", method = RequestMethod.POST)
-    public String processEditEvaluation(@ModelAttribute Evaluation evaluation, HttpSession request, Model model) {
-
+    public String processEditEvaluation(@ModelAttribute Evaluation evaluation, HttpSession request,
+                                        Model model, @RequestParam Integer buildingId) {
 
         User userFromSession = getUserFromSession(request);
         model.addAttribute("userFromSession", userFromSession);
+        Building building = buildingDao.findOne(buildingId);
+        evaluation.setRelatedBuilding(building);
 
         model.addAttribute("buildings", userFromSession.getBuildings());
         evaluationDao.save(evaluation);

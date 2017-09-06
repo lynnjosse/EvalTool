@@ -61,7 +61,7 @@ public class UserController extends AbstractController{
     @RequestMapping(value = "view/{userId}", method = RequestMethod.GET)
     public String viewMenu (HttpSession request, Model model, @PathVariable int userId) {
         User user = userDao.findOne(userId);
-        String title = user.getFirstName() + " " + user.getLastName() + "'s buildings";
+        String title = "Admin panel for " + user.getFirstName() + " " + user.getLastName();
 
         User userFromSession = getUserFromSession(request);
         model.addAttribute("userFromSession", userFromSession);
@@ -76,7 +76,9 @@ public class UserController extends AbstractController{
         User user = userDao.findOne(userId);
         User userFromSession = getUserFromSession(request);
         model.addAttribute("userFromSession", userFromSession);
-       // model.addAttribute("title", title);
+
+        String title = "Admin panel for " + user.getFirstName() + " " + user.getLastName();
+        model.addAttribute("title", title);
         model.addAttribute("buildings", user.getBuildings());
         model.addAttribute("ID", user.getId());
         for (int buildingId : buildingIds) {
@@ -85,6 +87,18 @@ public class UserController extends AbstractController{
             user.removeFromBuilding(building);
         }
         return "user/view";
+    }
+
+    @RequestMapping(value = "all")
+    public String viewAllUsers (HttpSession request, Model model) {
+
+        Iterable<User> users =  (userDao.findAll());
+
+        User userFromSession = getUserFromSession(request);
+        model.addAttribute("userFromSession", userFromSession);
+        model.addAttribute("users", users);
+        model.addAttribute("title", "Select a User");
+        return "user/all";
     }
 
 

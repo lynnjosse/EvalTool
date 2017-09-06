@@ -8,10 +8,8 @@
 
 <h1 th:text="${title}">Default Title</h1>
 
-<table>
-    <tr>
-        <td th:text="${building.address}">        </td>
-    </tr>
+<table class="table">
+
     <tr>
         <td>Ward</td>
         <td th:text="${building.ward}"></td>
@@ -42,8 +40,8 @@
 <form method = "post" th:object="${evaluation}" >
 
     <div class="form-group">
-        <label for="userDescription">Description</label>
-        <textarea name="userDescription" id = "userDescription" value="*{userDescription}"></textarea>
+        <label>Description</label>
+        <textarea class="form-control" th:field="*{userDescription}"></textarea>
     </div>
 
     <div class="form-check">
@@ -53,33 +51,32 @@
 
     <div class="form-group">
     <label>Describe the collapse (leave blank if no collapse)</label>
-    <textarea th:field="*{collapseNotes}"></textarea>
+    <textarea class="form-control" th:field="*{collapseNotes}"></textarea>
     </div>
 
-
     <div class="form-check">
-        <label >Is the first floor securely boarded?    </label>
+        <label >Is the first floor securely boarded? </label>
             <input type="checkbox"  th:field = "*{boardSecure}" value = "1"/>
     </div>
 
     <div class="form-group">
         <label >Notes on the board-up</label>
-        <textarea th:field="*{boardNotes}"></textarea>
+        <textarea class="form-control" th:field="*{boardNotes}"></textarea>
     </div>
 
     <div class="form-group">
         <label>Notes on the roof condition (if visible)</label>
-        <textarea th:field = "*{roofNotes}"></textarea>
+        <textarea class="form-control" th:field = "*{roofNotes}"></textarea>
     </div>
 
     <div class="form-group">
         <label>Notes on gutters (including whether any are present)</label>
-        <textarea th:field = "*{gutterNotes}"></textarea>
+        <textarea class="form-control" th:field = "*{gutterNotes}"></textarea>
     </div>
 
     <div class="form-group">
         <label>Notes on the lot</label>
-        <textarea th:field="*{envirNotes}"></textarea>
+        <textarea class="form-control" th:field="*{envirNotes}"></textarea>
     </div>
 
     <div class="form-group">
@@ -89,8 +86,11 @@
 
     <div class="form-group">
         <label >Notes on the outbuilding(s)</label>
-        <textarea th:field = "*{outbuildingNotes}"  ></textarea>
+        <textarea class="form-control" th:field = "*{outbuildingNotes}"  ></textarea>
     </div>
+
+    <input type = "hidden" name = "buildingId" th:value="${buildingId}"/>
+
 
 
     <input type = "submit" value = "Submit Evaluation"/>
