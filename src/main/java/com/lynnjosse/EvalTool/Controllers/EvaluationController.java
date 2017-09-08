@@ -50,18 +50,24 @@ public class EvaluationController extends AbstractController {
 
     @RequestMapping (value = "edit/{buildingId}", method = RequestMethod.POST)
     public String processEditEvaluation(@ModelAttribute Evaluation evaluation, HttpSession request,
-                                        Model model, @RequestParam Integer buildingId) {
+                                        Model model,
+                                        @RequestParam Integer buildingId) {
 
         User userFromSession = getUserFromSession(request);
         model.addAttribute("userFromSession", userFromSession);
         Building building = buildingDao.findOne(buildingId);
         evaluation.setRelatedBuilding(building);
 
+        //This is what i was trying to write at Andrew's suggestion to update evaluation rather than
+        //create a new one
+        //Evaluation existingEvaluation  = evaluationDao.findById(evaluation.getId());
+    //existingEvaluation.setUserDescription(evaluation.getUserDescription()); (this throws null exception)
+    //existingEvaluation.setEnvirNotes(evaluation.getEnvirNotes());
+    //evaluationDao.save(existingEvaluation);
+
         model.addAttribute("buildings", userFromSession.getBuildings());
         evaluationDao.save(evaluation);
         return "redirect:/user/index";
 
     }
-
-
 }

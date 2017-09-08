@@ -8,7 +8,7 @@ public class Evaluation {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
     private String userDescription;
     private boolean collapse;
     private String collapseNotes;
@@ -18,7 +18,7 @@ public class Evaluation {
     private String gutterNotes;
     private String adminNotes;
     private String envirNotes;
-    private int numOfOutbuildings;
+    private Integer numOfOutbuildings;
     private String outbuildingNotes;
 
     @OneToOne// (mappedBy = "relatedEvaluation")
@@ -32,7 +32,7 @@ public class Evaluation {
 
     public Evaluation() {}
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -81,10 +81,10 @@ public class Evaluation {
         this.envirNotes = envirNotes;
     }
 
-    public int getNumOfOutbuildings() {
+    public Integer getNumOfOutbuildings() {
         return numOfOutbuildings;
     }
-    public void setNumOfOutbuildings(int numOfOutbuildings) {
+    public void setNumOfOutbuildings(Integer numOfOutbuildings) {
         this.numOfOutbuildings = numOfOutbuildings;
     }
 

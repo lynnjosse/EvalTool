@@ -72,12 +72,13 @@ public class UserController extends AbstractController{
     }
 
     @RequestMapping(value = "view/{userId}", method = RequestMethod.POST)
-    public String processRemoval (@RequestParam int[] buildingIds, HttpSession request, Model model, @PathVariable int userId) {
+    public String processRemoval (@RequestParam int[] buildingIds, HttpSession request,
+                                  Model model, @PathVariable int userId) {
         User user = userDao.findOne(userId);
         User userFromSession = getUserFromSession(request);
         model.addAttribute("userFromSession", userFromSession);
 
-        String title = "Admin panel for " + user.getFirstName() + " " + user.getLastName();
+        String title = "Admin panel for user " + user.getFirstName() + " " + user.getLastName();
         model.addAttribute("title", title);
         model.addAttribute("buildings", user.getBuildings());
         model.addAttribute("ID", user.getId());

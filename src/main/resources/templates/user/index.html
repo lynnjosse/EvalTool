@@ -23,6 +23,10 @@
 
     <h4>My Buildings</h4>
 
+    <div th:unless="${buildings} and ${buildings.size()}">
+        <p><em> No buildings assigned yet</em></p>
+    </div>
+
 
     <table  class="table">
     <div th:each="building : ${buildings}">
@@ -35,10 +39,14 @@
                 <input type = "hidden" name = "buildingId" th:value = "${building.id}"/>
                 <input type = "submit" value = "Create Evaluation"/>
             </form>
-             <form th:unless="${building.relatedEvaluation} == null" action = "/evaluation/edit/{buildingId}">
+
+             <div th:unless="${building.relatedEvaluation} == null">
+
+             <form th:action = " '/evaluation/edit/' + ${building.id}">
                  <!--<input type = "hidden" name = "buildingId" th:value = "${building.id}"/> -->
                  <input type = "submit" value = "Edit Evaluation"/>
              </form>
+             </div>
          </td>
 
      </tr>

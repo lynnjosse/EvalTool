@@ -19,31 +19,44 @@ TODO: long-term, I would like to know if the building has other users assigned t
 
 <br/>
 
-<h4>Unassign building from user:</h4>
 
-<form method="post">
-    <div th:each = "building:${buildings}" class = "checkbox">
-        <input type="checkbox" name="buildingIds" th:value="${building.id}" th:id="${building.id}"/>
-        <label th:for="${building.id}"
-                th:text="${building.address}">
-        </label>
+<div th:unless="${buildings.size()}">No buildings assigned to this user yet</div>
+
+<div th:if="${buildings.size()}">
+    <h4>Unassign building from user:</h4>
+
+    <form method="post">
+        <div th:each = "building:${buildings}" class = "checkbox">
+            <input type="checkbox" name="buildingIds" th:value="${building.id}" th:id="${building.id}"/>
+                <label th:for="${building.id}"
+                    th:text="${building.address}">
+                </label>
+        </div>
+
+        <input type = "submit" value = "Remove" />
+    </form>
+
+
+    <br/>
+    <h4>View completed evaluations:</h4>
+
+    <ul>
+        <li th:each = "building:${buildings}">
+            <a th:unless="${building.relatedEvaluation} == null" th:href=" '/evaluation/edit/' + ${building.id}" >
+                <strong th:text="${building.address}"></strong>  </a>
+        </li>
+
+    </ul>
+</div>
+
+<form    method = "post" action = "/user/select-ward">
+    <div class = "form-group">
+    <input type="hidden" name= "userId" th:value="${userId}"/>
     </div>
 
-    <input type = "submit" value = "Remove" />
+    <input type = "submit" value="Assign Building to this user" />
+
 </form>
-
-<p th:unless="${buildings.size()}">No buildings assigned to this user yet</p>
-
-<br/>
-<h4>View completed evaluations:</h4>
-
-<ul>
-    <li th:each = "building:${buildings}">
-
-        <a th:unless="${building.relatedEvaluation} == null" th:href=" '/evaluation/edit/' + ${building.id}" ><em th:text="${building.address}"></em>  </a>
-    </li>
-
-</ul>
 
 </body>
 </html>

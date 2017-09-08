@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.List;
 
-
 @Entity
 public class User {
 
@@ -46,7 +45,6 @@ public class User {
         this.lastName = lastName;
     }
 
-
     public int getId() {
         return id;
     }
@@ -76,18 +74,15 @@ public class User {
 
     public List<Building> getBuildings() { return buildings; }
 
-
     public void removeFromBuilding(Building building) {
         this.getBuildings().remove(building);
         building.getUsers().remove(this);
     }
-
 
     public String toString() {
         if (isAdmin()) {
             return firstName + " " + lastName + " (admin)";}
         else {
             return firstName + " " + lastName;}
-
     }
 }
