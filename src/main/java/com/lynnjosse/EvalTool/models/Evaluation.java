@@ -20,21 +20,17 @@ public class Evaluation {
     private String envirNotes;
     private Integer numOfOutbuildings;
     private String outbuildingNotes;
+    private String imageSource;
+
 
     @OneToOne// (mappedBy = "relatedEvaluation")
     @JoinColumn(name="related_building_id")
     private Building relatedBuilding;
 
-    //@OneToOne
-    //@JoinColumn(name = "id")
-   // @MapsId
-    //private Post post;
 
     public Evaluation() {}
 
-    public Integer getId() {
-        return id;
-    }
+    public Integer getId() {  return id;  }
 
     public String getUserDescription() { return userDescription; }
     public void setUserDescription(String userDescription) { this.userDescription = userDescription;}
@@ -91,6 +87,15 @@ public class Evaluation {
     public String getOutbuildingNotes() { return outbuildingNotes; }
     public void setOutbuildingNotes(String outbuildingNotes) {
         this.outbuildingNotes = outbuildingNotes;
+    }
+
+
+    public String getImageSource() {
+        return imageSource;
+    }
+
+    public void setImageSource(String imageSource) {
+        this.imageSource = imageSource;
     }
 
     public Building getRelatedBuilding() {

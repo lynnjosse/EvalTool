@@ -38,36 +38,41 @@ public class EvaluationController extends AbstractController {
 
     @RequestMapping (value = "edit/{buildingId}", method = RequestMethod.GET)
     public String displayEditEvaluation(HttpSession request, Model model, @PathVariable Integer buildingId) {
-        Building building = buildingDao.findOne(buildingId);
+
+        User userFromSession = getUserFromSession(request);Building building = buildingDao.findOne(buildingId);
         model.addAttribute ("building", building);
         model.addAttribute("evaluation", building.getRelatedEvaluation());
         model.addAttribute("title", building.getAddress());
-        User userFromSession = getUserFromSession(request);
         model.addAttribute("userFromSession", userFromSession);
         model.addAttribute("buildingId", buildingId);
         return "evaluation/edit";
     }
 
+    /* this results in creation of new object with all of the field filled in */
     @RequestMapping (value = "edit/{buildingId}", method = RequestMethod.POST)
     public String processEditEvaluation(@ModelAttribute Evaluation evaluation, HttpSession request,
                                         Model model,
                                         @RequestParam Integer buildingId) {
-
         User userFromSession = getUserFromSession(request);
         model.addAttribute("userFromSession", userFromSession);
         Building building = buildingDao.findOne(buildingId);
         evaluation.setRelatedBuilding(building);
+        model.addAttribute("buildings", userFromSession.getBuildings());
+        evaluationDao.save(evaluation);
+        return "redirect:/user/index";
+    }
 
-        //This is what i was trying to write at Andrew's suggestion to update evaluation rather than
-        //create a new one
-        //Evaluation existingEvaluation  = evaluationDao.findById(evaluation.getId());
+    //This is what i was trying to write at Andrew's suggestion to update evaluation rather than
+    //create a new one
+    // existingEvaluation  = evaluationDao.findById(evaluationToEdit.id)
+    //existingEvaluation.setAddress(evaluationToEdit.getAddress())
+    //        evaluationDao.save(existingEvaluation);
+
+    //Evaluation existingEvaluation  = evaluationDao.findById(evaluation.getId());
     //existingEvaluation.setUserDescription(evaluation.getUserDescription()); (this throws null exception)
     //existingEvaluation.setEnvirNotes(evaluation.getEnvirNotes());
     //evaluationDao.save(existingEvaluation);
 
-        model.addAttribute("buildings", userFromSession.getBuildings());
-        evaluationDao.save(evaluation);
-        return "redirect:/user/index";
 
-    }
+
 }

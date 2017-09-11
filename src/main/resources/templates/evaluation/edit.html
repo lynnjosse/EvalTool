@@ -37,6 +37,11 @@
     </tr>
 </table>
 
+<div th:unless="${evaluation.imageSource} == null">
+    <img th:src = "${evaluation.imageSource}"/></div>
+
+
+
 <form method = "post" th:object="${evaluation}" >
 
     <div class="form-group">
@@ -75,19 +80,25 @@
     </div>
 
     <div class="form-group">
-        <label>Notes on the lot</label>
+        <label th:for = "${envirNotes}">Notes on the lot</label>
         <textarea class="form-control" th:field="*{envirNotes}"></textarea>
     </div>
 
     <div class="form-group">
-        <label>Number of outbuildings</label>
+        <label th:for = "${numOfOutbuildings}">Number of outbuildings</label>
         <input type = "text" th:field = "*{numOfOutbuildings}" />
     </div>
 
     <div class="form-group">
-        <label >Notes on the outbuilding(s)</label>
+        <label th:for = "${outbuildingNotes}">Notes on the outbuilding(s)</label>
         <textarea class="form-control" th:field = "*{outbuildingNotes}"  ></textarea>
     </div>
+
+    <div class="form-group">
+        <label th:for = "${imageSource}">Image Link</label>
+        <input class="form-control" type = "text" th:field = "*{imageSource}"  />
+    </div>
+
 
     <input type = "hidden" name = "buildingId" th:value="${buildingId}"/>
 
