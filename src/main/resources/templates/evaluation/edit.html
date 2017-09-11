@@ -37,8 +37,8 @@
     </tr>
 </table>
 
-<div th:unless="${evaluation.imageSource} == null">
-    <img th:src = "${evaluation.imageSource}"/></div>
+<div id = "evalphotodiv" th:unless="${evaluation.imageSource} == null">
+    <img th:src = "${evaluation.imageSource}" id="evalphoto" /></div>
 
 
 
@@ -94,7 +94,7 @@
         <textarea class="form-control" th:field = "*{outbuildingNotes}"  ></textarea>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" >
         <label th:for = "${imageSource}">Image Link</label>
         <input class="form-control" type = "text" th:field = "*{imageSource}"  />
     </div>
