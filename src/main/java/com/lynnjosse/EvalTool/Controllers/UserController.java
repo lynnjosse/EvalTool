@@ -44,6 +44,7 @@ public class UserController extends AbstractController{
             return "user/add-admin";
         }
 
+//    TODO: add admin
 //    @RequestMapping(value = "add-admin", method = RequestMethod.POST)
 //    public String processAddAdmin(@RequestParam int[] userIds) {
 //        model.addAttribute ("title", "Add admins");
@@ -84,8 +85,11 @@ public class UserController extends AbstractController{
         model.addAttribute("ID", user.getId());
         for (int buildingId : buildingIds) {
 
+           // TODO: there's an error when there is only one building on list
+
             Building building = buildingDao.findOne(buildingId);
             user.removeFromBuilding(building);
+            userDao.save(user);
         }
         return "user/view";
     }
@@ -140,7 +144,7 @@ public class UserController extends AbstractController{
     public String selectStreet(HttpSession request, Model model,
                                @RequestParam Integer wardNum, @RequestParam Integer userId) {
         List streets = buildingDao.findDistinctStreets(wardNum);
-        //sort(streets);
+        sort(streets);
         User user = userDao.findOne(userId);
         String userName = user.getFirstName() + " " + user.getLastName();
 
