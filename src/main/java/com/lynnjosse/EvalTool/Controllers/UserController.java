@@ -83,14 +83,22 @@ public class UserController extends AbstractController{
         model.addAttribute("title", title);
         model.addAttribute("buildings", user.getBuildings());
         model.addAttribute("ID", user.getId());
-        for (int buildingId : buildingIds) {
 
-           // TODO: there's an error when there is only one building on list
 
-            Building building = buildingDao.findOne(buildingId);
-            user.removeFromBuilding(building);
-            userDao.save(user);
+        if (buildingIds != null) {
+            //TODO: need proper syntax for above
+
+            for (int buildingId : buildingIds) {
+
+                // TODO: there's an error when no buildings are selected
+
+                Building building = buildingDao.findOne(buildingId);
+                user.removeFromBuilding(building);
+                userDao.save(user);
+            }
+
         }
+
         return "user/view";
     }
 
