@@ -15,7 +15,6 @@ public class User {
     @GeneratedValue
     private int id;
 
-
     @NotNull
     private String pwHash;
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

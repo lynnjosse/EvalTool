@@ -41,7 +41,6 @@
     <img th:src = "${evaluation.imageSource}" id="evalphoto" /></div>
 
 
-
 <form method = "post" th:object="${evaluation}" >
 
     <div class="form-group">
@@ -99,8 +98,9 @@
         <input class="form-control" type = "text" th:field = "*{imageSource}"  />
     </div>
 
-
+    <input type="hidden" name="evaluationId" th:value="*{id}"/>
     <input type = "hidden" name = "buildingId" th:value="${buildingId}"/>
+
 
     <input type = "submit" value = "Submit Evaluation"/>
 
