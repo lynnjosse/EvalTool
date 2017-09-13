@@ -48,8 +48,8 @@ TODO: long-term, I would like to know if the building has other users assigned t
     <h4>View completed evaluations:</h4>
 
     <ul>
-        <li th:each = "building:${buildings}">
-            <a th:unless="${building.relatedEvaluation} == null" th:href=" '/evaluation/edit/' + ${building.id}" >
+        <li th:each = "building:${buildings}"  th:unless="${building.relatedEvaluation} == null" >
+            <a  th:href=" '/evaluation/edit/' + ${building.id}" >
                 <strong th:text="${building.address}"></strong>  </a>
         </li>
 
