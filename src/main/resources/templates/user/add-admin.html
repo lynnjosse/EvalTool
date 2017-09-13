@@ -14,7 +14,7 @@
     <div th:each="user : ${users}" class="checkbox">
         <span th:unless="${user.admin}" >
         <input type="checkbox" name="userIds" th:value="${user.id}" th:id="${user.id}"/>
-        <label th:for="${user.id}" th:text="${user.lastName + ' ' + user.firstName}"></label></span>
+        <label th:for="${user.id}" th:text="${user.toString()}"></label></span>
         <br />
     </div>
     <input type = "submit" value = "add admins"/>

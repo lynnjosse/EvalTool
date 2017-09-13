@@ -44,20 +44,20 @@ public class UserController extends AbstractController{
             return "user/add-admin";
         }
 
-//    TODO: add admin
-//    @RequestMapping(value = "add-admin", method = RequestMethod.POST)
-//    public String processAddAdmin(@RequestParam int[] userIds) {
-//        model.addAttribute ("title", "Add admins");
-//        Iterable<User> users = userDao.findAll();
-//        model.addAttribute("users" , users);
-//
-//        for (int userId : userIds) {
-//
-//            //change user.admin to true
-//            //save user
-//        }
-//        return "redirect:";
-    //}
+
+    @RequestMapping(value = "add-admin", method = RequestMethod.POST)
+        public String processAddAdmin(@RequestParam int[] userIds, Model model) {
+        model.addAttribute ("title", "Add admins");
+        Iterable<User> users = userDao.findAll();
+        model.addAttribute("users" , users);
+
+        for (int userId : userIds) {
+           User userToMakeAdmin = userDao.findOne(userId);
+           userToMakeAdmin.setAdmin(true);
+                userDao.save(userToMakeAdmin);
+            }
+        return "redirect:/user/index";
+    }
 
     @RequestMapping(value = "view/{userId}", method = RequestMethod.GET)
     public String viewMenu (HttpSession request, Model model, @PathVariable int userId) {

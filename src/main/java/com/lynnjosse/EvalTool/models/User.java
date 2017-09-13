@@ -71,6 +71,10 @@ public class User {
         return admin;
     }
 
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
     public List<Building> getBuildings() { return buildings; }
 
     public void removeFromBuilding(Building building) {
