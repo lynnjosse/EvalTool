@@ -43,7 +43,6 @@
              <div th:unless="${building.relatedEvaluation} == null">
 
              <form th:action = " '/evaluation/edit/' + ${building.id}">
-                 <!--<input type = "hidden" name = "buildingId" th:value = "${building.id}"/> -->
                  <input type = "submit" value = "Edit Evaluation"/>
              </form>
              </div>
