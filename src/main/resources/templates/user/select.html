@@ -15,7 +15,7 @@
         <label th:for="User">User</label>
         <select name = "userId">
             <option th:each="user:*{userList}"
-                    th:text="${user.firstName}"
+                    th:text="${user.toString()}"
                     th:value="${user.id}"></option>
         </select>
     </div>

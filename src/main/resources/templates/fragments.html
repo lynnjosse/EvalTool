@@ -18,7 +18,8 @@
     <div th:if="${userFromSession}">
         <nav class="user-nav">
             user in session: <span th:text="${userFromSession.toString()}"></span> |
-            <a href="/logout">Log Out</a>
+            <a href="/logout">Log Out</a> |
+            <a href = "/user/index">My Buildings</a>
         </nav>
     </div>
 
