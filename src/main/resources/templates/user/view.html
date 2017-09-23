@@ -22,7 +22,10 @@ TODO: long-term, I would like to know if the building has other users assigned t
 
 <div th:unless="${buildings.size()}">No buildings assigned to this user yet</div>
 
+
 <div th:if="${buildings.size()}">
+
+
     <h4>Unassign building from user:</h4>
 
     <form method="post">
@@ -33,12 +36,20 @@ TODO: long-term, I would like to know if the building has other users assigned t
                 </label>
         </div>
 
-       <!-- <div th:unless="${buildingIds}" >
+<!--TODO: create a way of passing an empty buildingIds object back to the controller
+so there is no error when you hit remove without selecting anything.
+The problem I've been having is that anything I try is adding a place into the array of ints,
+which I don't understand
+            <input type="hidden" name = "buildingIds" value = "[]"/>
 
-            <input type="hidden" name = "buildingIds"/>
+<div th:object="${session.user}">
+  ...
+  <p>Age: <span th:text="*{age}?: '(no age specified)'">27</span>.</p>
+</div>
 
-        </div>
-        -->
+
+-->
+
 
         <input type = "submit" value = "Remove" />
     </form>

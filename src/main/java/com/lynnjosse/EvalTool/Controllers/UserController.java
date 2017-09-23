@@ -30,23 +30,22 @@ public class UserController extends AbstractController{
         model.addAttribute("userFromSession", userFromSession);
         model.addAttribute("title", "Welcome, " + userFromSession);
         return "user/index";
-    }
+        }
 
     @RequestMapping(value = "add-admin", method = RequestMethod.GET)
-        public String displayAddAdmin(HttpSession request, Model model) {
-            model.addAttribute ("title", "Add admins");
+     public String displayAddAdmin(HttpSession request, Model model) {
+        model.addAttribute ("title", "Add admins");
+        User userFromSession = getUserFromSession(request);
+        model.addAttribute("userFromSession", userFromSession);
 
-            User userFromSession = getUserFromSession(request);
-            model.addAttribute("userFromSession", userFromSession);
-
-            Iterable<User> users = userDao.findAll();
-            model.addAttribute("users" , users);
-            return "user/add-admin";
-        }
+        Iterable<User> users = userDao.findAll();
+        model.addAttribute("users" , users);
+        return "user/add-admin";
+     }
 
 
     @RequestMapping(value = "add-admin", method = RequestMethod.POST)
-        public String processAddAdmin(@RequestParam int[] userIds, Model model) {
+     public String processAddAdmin(@RequestParam int[] userIds, Model model) {
         model.addAttribute ("title", "Add admins");
         Iterable<User> users = userDao.findAll();
         model.addAttribute("users" , users);
@@ -62,6 +61,11 @@ public class UserController extends AbstractController{
     @RequestMapping(value = "view/{userId}", method = RequestMethod.GET)
     public String viewMenu (HttpSession request, Model model, @PathVariable int userId) {
         User user = userDao.findOne(userId);
+        int[] buildingIds = null;
+
+
+
+
         String title = "Admin panel for " + user.getFirstName() + " " + user.getLastName();
 
         User userFromSession = getUserFromSession(request);
@@ -69,35 +73,29 @@ public class UserController extends AbstractController{
         model.addAttribute("title", title);
         model.addAttribute("buildings", user.getBuildings());
         model.addAttribute("ID", user.getId());
+        model.addAttribute("buildingIds", buildingIds);
         return "user/view";
     }
 
     @RequestMapping(value = "view/{userId}", method = RequestMethod.POST)
-    public String processRemoval (@RequestParam int[] buildingIds, HttpSession request,
+    public String processRemoval (@RequestParam(required = false) int[] buildingIds, HttpSession request,
                                   Model model, @PathVariable int userId) {
         User user = userDao.findOne(userId);
         User userFromSession = getUserFromSession(request);
         model.addAttribute("userFromSession", userFromSession);
 
-        String title = "Admin panel for user " + user.getFirstName() + " " + user.getLastName();
+        String title = "Admin panel for user " + user.toString();
         model.addAttribute("title", title);
         model.addAttribute("buildings", user.getBuildings());
         model.addAttribute("ID", user.getId());
 
-
-        if (buildingIds != null) {
-            //TODO: need proper syntax for above
-
-            for (int buildingId : buildingIds) {
-
-                // TODO: there's an error when no buildings are selected
-
-                Building building = buildingDao.findOne(buildingId);
-                user.removeFromBuilding(building);
-                userDao.save(user);
+            if (buildingIds != null) {
+                for (int buildingId : buildingIds) {
+                    Building building = buildingDao.findOne(buildingId);
+                    user.removeFromBuilding(building);
+                    userDao.save(user);
+                }
             }
-
-        }
 
         return "user/view";
     }
