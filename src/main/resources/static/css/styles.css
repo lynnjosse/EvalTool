@@ -1,11 +1,24 @@
 
 body {
-    background-color: #f2f2f2 !important;
+    background-color: #f2f2f2;
 }
 
-#evalphotodiv  {  max-height: 100px;  }
+label {
+    color:#4f0608;
+    }
 
-#evalphoto {max-height: 95px; }
+.form-control{
+            display:block;width:70%;padding:.5rem .75rem;font-size:1.5rem;line-height:1.5;color:#4f0608;
+            font-family: "Courier New", Courier, serif;
+            background-color:#fff;background-image:none;background-clip:padding-box;border:1px solid #7c1518);
+            border-radius:.4rem;transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+
+#evalphotodiv  {  max-height: 175px;  }
+
+#evalphoto {max-height: 125px;
+             padding-bottom: 25px;}
 
 nav {  margin-bottom: 20px; }
 
