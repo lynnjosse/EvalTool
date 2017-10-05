@@ -14,15 +14,27 @@ label {
 
 textarea.form-control{
     height: 100px;
-    }
+}
 
 textarea.form-control:focus { border:2px solid #333; }
 
 
 #evalphotodiv  {  max-height: 275px;  }
 
-#evalphoto {max-height: 250px;
-             padding-bottom: 25px;}
+#evalphoto {
+    max-height: 400px;
+    padding-bottom: 25px;
+}
+
+img  {
+    float: right;
+}
+
+#mapid {
+    height: 400px;
+    width: 45%;
+    padding-bottom: 25 px;
+}
 
 nav {  margin-bottom: 20px; }
 

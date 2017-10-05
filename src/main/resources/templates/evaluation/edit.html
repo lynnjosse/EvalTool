@@ -40,6 +40,17 @@
 <div id = "evalphotodiv" th:unless="${evaluation.imageSource} == null">
     <img th:src = "${evaluation.imageSource}" id="evalphoto" /></div>
 
+<div id="mapid"></div>
+<script>
+    var mymap = L.map('mapid').setView([38.633, -90.253], 12);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.streets',
+    accessToken: 'pk.eyJ1IjoibHlubmpvc3NlIiwiYSI6ImNqOGV0Z201bTE3MWwycW1zOGJwNGtrb28ifQ.cLxuUHOptmo25ao85f-0MQ'
+}).addTo(mymap);
+</script>
+
 
 <form method = "post" th:object="${evaluation}" >
 
