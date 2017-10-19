@@ -34,6 +34,26 @@ public class EvaluationController extends AbstractController {
         evaluationDao.save(newEvaluation);
         buildingDao.save(building);
         return "redirect:edit/" + buildingId;
+
+        /*TODO: pass the building object to the URLReader,
+        run the URLReader, and then parse the results, and then
+        persist the lat and long in the new evaluation object.
+        So I think the way it works is to call the function from here, and is there a way to
+        include either building.address as a parameter ...
+        maybe something like this:
+
+
+        String addressString = building.address
+        char[] charArray = addressString.toCharArray();
+        for (char in charArray) {
+            if (char == " ") {
+                char = "+";
+            }
+        addressString = charArray.toString;
+
+
+
+         */
     }
 
     @RequestMapping (value = "edit/{buildingId}", method = RequestMethod.GET)
@@ -74,17 +94,5 @@ public class EvaluationController extends AbstractController {
         evaluationDao.save(existingEvaluation);
         return "redirect:/user/index";
     }
-
-    //This is what i was trying to write at Andrew's suggestion to update evaluation rather than
-    //create a new one
-    // existingEvaluation  = evaluationDao.findById(evaluation.id)
-    //existingEvaluation.setAddress(evaluation.getAddress())
-    //        evaluationDao.save(existingEvaluation);
-
-    //Evaluation existingEvaluation  = evaluationDao.findById(evaluation.getId());
-    //existingEvaluation.setUserDescription(evaluation.getUserDescription()); (this throws null exception)
-    //existingEvaluation.setEnvirNotes(evaluation.getEnvirNotes());
-    //evaluationDao.save(existingEvaluation);
-
 
 }
