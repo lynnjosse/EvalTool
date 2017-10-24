@@ -1,6 +1,6 @@
 
 body {
-    background-color: #f2f2f2;
+    background-color: #d88579;
 }
 
 label {
@@ -8,7 +8,8 @@ label {
     }
 
 .form-control{
-            display:block;width:90%;padding:.5rem .75rem;font-size:1.5rem;line-height:1.5;color:#4f0608;
+            display:block;width:90%;padding:.5rem .75rem;font-size:1.5rem;line-height:1.5;
+            color:#4f0608;
             font-family: "Courier New", Courier, serif;
 }
 
@@ -36,5 +37,7 @@ img  {
     padding-bottom: 25 px;
 }
 
-nav {  margin-bottom: 20px; }
+nav a {  margin-bottom: 20px;
+        color: #1b1830;
+        }
 
