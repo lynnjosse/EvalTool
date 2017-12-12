@@ -21,6 +21,9 @@ public class Evaluation {
     private Integer numOfOutbuildings;
     private String outbuildingNotes;
     private String imageSource;
+    private Double latitude;
+    private Double longitude;
+
 
 
     @OneToOne// (mappedBy = "relatedEvaluation")
@@ -93,7 +96,6 @@ public class Evaluation {
     public String getImageSource() {
         return imageSource;
     }
-
     public void setImageSource(String imageSource) {
         this.imageSource = imageSource;
     }
@@ -105,4 +107,14 @@ public class Evaluation {
         this.relatedBuilding = relatedBuilding;
     }
 
+    public Double getLatitude() {return latitude;}
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {return longitude;}
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
 }

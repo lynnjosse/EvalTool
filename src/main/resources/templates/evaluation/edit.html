@@ -8,6 +8,10 @@
 
 <h1 th:text="${title}">Default Title</h1>
 
+<div id="overlay" th:unless="${evaluation.imageSource} == null">
+    <img th:src = "${evaluation.imageSource}"  />
+</div>
+
 <table class="table">
 
     <tr>
@@ -106,5 +110,12 @@
 
 </form>
 
+
+<script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script
+        src="/scripts/photo-overlay.js"  type="text/javascript" charset="utf-8"></script>
 </body>
 </html>
