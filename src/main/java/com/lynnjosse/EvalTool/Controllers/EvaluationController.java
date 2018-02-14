@@ -35,25 +35,6 @@ public class EvaluationController extends AbstractController {
         buildingDao.save(building);
         return "redirect:edit/" + buildingId;
 
-        /*TODO: pass the building object to the URLReader,
-        run the URLReader, and then parse the results, and then
-        persist the lat and long in the new evaluation object.
-        So I think the way it works is to call the function from here, and is there a way to
-        include either building.address as a parameter ...
-        maybe something like this:
-
-
-        String addressString = building.address
-        char[] charArray = addressString.toCharArray();
-        for (char in charArray) {
-            if (char == " ") {
-                char = "+";
-            }
-        addressString = charArray.toString;
-
-
-
-         */
     }
 
     @RequestMapping (value = "edit/{buildingId}", method = RequestMethod.GET)
